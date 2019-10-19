@@ -1,0 +1,47 @@
+{
+  "name": "@code-engine/types",
+  "version": "1.0.0-alpha.0",
+  "description": "TypeScript type definitions for CodeEngine",
+  "keywords": [
+    "code-engine",
+    "type-definitions"
+  ],
+  "author": {
+    "name": "James Messinger",
+    "url": "https://jamesmessinger.com"
+  },
+  "license": "MIT",
+  "homepage": "https://engine.codes",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CodeEngineOrg/code-engine-types.git"
+  },
+  "main": "src/index.d.ts",
+  "types": "src/index.d.ts",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "lint": "tslint -p tsconfig.json src/**/*.ts",
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "test": "npm run lint",
+    "upgrade": "npm-check -u",
+    "bump": "bump --tag --push --all",
+    "release": "npm run upgrade && npm run clean && npm run build && npm test && npm run bump"
+  },
+  "engines": {
+    "node": ">=12.5"
+  },
+  "engineStrict": true,
+  "devDependencies": {
+    "@types/node": "^12.7.5",
+    "npm-check": "^5.9.0",
+    "tslint": "^5.20.0",
+    "tslint-modular": "^1.4.1",
+    "typescript": "^3.6.3",
+    "typescript-tslint-plugin": "^0.5.0",
+    "version-bump-prompt": "^5.0.3"
+  },
+  "dependencies": {}
+}
