@@ -15,9 +15,12 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Run Mocha",
+      "name": "Run Tests",
       "program": "${workspaceRoot}/node_modules/typescript/bin/tsc",
-      "args": [],
+      "args": [
+        "--noEmit",
+        "test/specs/index.spec.ts"
+      ],
       "outFiles": [
         "${workspaceFolder}/lib/**/*.js"
       ],

@@ -25,7 +25,8 @@
     "lint": "tslint -p tsconfig.json src/**/*.ts",
     "build": "tsc",
     "watch": "tsc --watch",
-    "test": "npm run lint",
+    "test": "npm run test:typescript && npm run lint",
+    "test:typescript": "tsc --noEmit test/specs/index.spec.ts",
     "upgrade": "npm-check -u",
     "bump": "bump --tag --push --all",
     "release": "npm run upgrade && npm run clean && npm run build && npm test && npm run bump"
