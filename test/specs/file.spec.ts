@@ -1,5 +1,6 @@
 // tslint:disable: completed-docs
 import { AnyContents, File, FileInfo, FileMetadata } from "../../";
+import { testCloneable } from "./cloneable.spec";
 
 export function testFile(): File {
   return {
@@ -33,7 +34,7 @@ export function testFileMetadata(): FileMetadata {
   return {
     foo: "bar",
     biz: 42,
-    baz: /regexp/,
+    baz: testCloneable(),
   };
 }
 

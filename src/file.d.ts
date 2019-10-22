@@ -1,4 +1,5 @@
 import { URL } from "url";
+import { Cloneable } from "./cloneable";
 
 /**
  * A CodeEngine file. This does not necessarily correspond to a file on disk.
@@ -108,7 +109,9 @@ export interface FileInfo {
 /**
  * Arbitrary file metadata that can be added by plugins.
  */
-export type FileMetadata = Record<string, unknown>;
+export interface FileMetadata {
+  [key: string]: Cloneable;
+}
 
 
 /**
