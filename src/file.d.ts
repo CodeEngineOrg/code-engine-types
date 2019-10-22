@@ -36,7 +36,14 @@ export interface File {
   readonly source: string;
 
   /**
-   * The complete path and file name.
+   * A source map that maps the file's current contents back to its original source contents.
+   *
+   * @see https://github.com/mozilla/source-map
+   */
+  sourceMap?: SourceMap;
+
+  /**
+   * The path and file name, relative to the destination.
    *
    * @example
    *  index.html
@@ -98,6 +105,7 @@ export interface File {
 export interface FileInfo {
   path: string;
   source?: URL | string;
+  sourceMap?: SourceMap;
   createdAt?: Date;
   modifiedAt?: Date;
   metadata?: FileMetadata;
@@ -119,3 +127,19 @@ export interface FileMetadata {
  * The value will always be converted to a `Buffer`.
  */
 export type AnyContents = string | Buffer | Uint8Array | ArrayBuffer;
+
+
+/**
+ * An object that maps a file's current contents back to its original source contents.
+ *
+ * @see https://github.com/mozilla/source-map
+ */
+export interface SourceMap {
+  version: number;
+  file: string;
+  sourceRoot?: string;
+  sources: string[];
+  names: string[];
+  mappings: string;
+  sourcesContent?: string[];
+}
