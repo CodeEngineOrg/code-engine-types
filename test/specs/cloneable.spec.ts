@@ -15,6 +15,7 @@ export function testCloneable(): Cloneable {
     array: testCloneableArray(),
     set: testCloneableSet(),
     map: testCloneableMap(),
+    buffer: Buffer.alloc(0),
     arrayBuffer: new ArrayBuffer(0),
     dataView: new DataView(new ArrayBuffer(0)),
     int8Array: new Int8Array(),
