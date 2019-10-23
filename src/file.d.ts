@@ -40,7 +40,7 @@ export interface File {
    *
    * @see https://github.com/mozilla/source-map
    */
-  sourceMap?: SourceMap;
+  sourceMap: SourceMap | undefined;
 
   /**
    * The path and file name, relative to the destination.
