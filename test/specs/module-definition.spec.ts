@@ -1,5 +1,6 @@
 // tslint:disable: completed-docs
 import { ModuleDefinition } from "../../";
+import { testCloneable } from "./cloneable.spec";
 
 export function testModuleDefinition(): ModuleDefinition {
   return {
@@ -17,10 +18,6 @@ export function testModuleDefinitionWithPrimitiveData(): ModuleDefinition {
 export function testModuleDefinitionWithObjectData(): ModuleDefinition {
   return {
     moduleId: "lodash",
-    data: {
-      foo: "bar",
-      biz: 42,
-      baz: /regexp/,
-    }
+    data: testCloneable(),
   };
 }

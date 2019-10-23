@@ -1,3 +1,5 @@
+import { Cloneable } from "./cloneable";
+
 /**
  * A JavaScript module whose default export is a `FileProcessor` or `FileProcessorFactory`.
  */
@@ -18,5 +20,5 @@ export interface ModuleDefinition {
    *
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm
    */
-  data?: unknown;
+  data?: Cloneable;
 }
