@@ -27,7 +27,7 @@
     "watch": "tsc --watch",
     "test": "npm run test:typescript && npm run lint",
     "test:typescript": "tsc --noEmit test/specs/index.spec.ts",
-    "upgrade": "npm-check -u",
+    "upgrade": "npm-check -u && npm audit fix",
     "bump": "bump prerelease --tag --push --all",
     "release": "npm run upgrade && npm run build && npm test && npm run bump"
   },
