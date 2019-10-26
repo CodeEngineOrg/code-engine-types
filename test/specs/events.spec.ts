@@ -2,7 +2,7 @@
 import { BuildFinishedEventData, BuildStartingEventData, EventName, LogEventData } from "../../";
 import { testBuildSummary } from "./build-summary.spec";
 import { testContext } from "./context.spec";
-import { testFileInfo } from "./file.spec";
+import { testChangedFileInfo } from "./file.spec";
 import { testLogLevel } from "./logger.spec";
 
 export function testEventName(): EventName {
@@ -26,10 +26,12 @@ export function testLogEventData(): LogEventData {
 export function testBuildStartingEventData(): BuildStartingEventData {
   return {
     ...testContext(),
+    fullBuild: false,
+    partialBuild: true,
     changedFiles: [
-      testFileInfo(),
-      testFileInfo(),
-      testFileInfo(),
+      testChangedFileInfo(),
+      testChangedFileInfo(),
+      testChangedFileInfo(),
     ],
   };
 }

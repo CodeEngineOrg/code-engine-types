@@ -1,6 +1,6 @@
 import { BuildSummary } from "./build-summary";
 import { Context } from "./context";
-import { FileInfo } from "./file";
+import { ChangedFileInfo } from "./file";
 import { LogLevel } from "./logger";
 
 /**
@@ -28,9 +28,21 @@ export interface LogEventData {
  */
 export interface BuildStartingEventData extends Context {
   /**
-   * The files that were changed and triggered the build. This only applies for partial builds.
+   * Indicates whether this is a full build (as opposed to a partial re-build).
    */
-  changedFiles: FileInfo[];
+  fullBuild: boolean;
+
+  /**
+   * Indicates whether this is a partial build, which only includes files that have changed
+   * since the previous build.
+   */
+  partialBuild: boolean;
+
+  /**
+   * The file changes that have occurred since the previous build. For full builds this array
+   * is empty.
+   */
+  changedFiles: ChangedFileInfo[];
 }
 
 /**
