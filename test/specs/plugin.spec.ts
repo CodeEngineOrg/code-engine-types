@@ -1,6 +1,6 @@
 // tslint:disable: completed-docs no-async-without-await
 import { AsyncAllIterable, Context, File, Plugin, PluginDefinition } from "../..";
-import { testFileInfo } from "./file.spec";
+import { testChangedFileInfo, testFileInfo } from "./file.spec";
 import { testFilter } from "./filters.spec";
 import { testModuleDefinition } from "./module-definition.spec";
 
@@ -73,6 +73,10 @@ export function testAsyncPlugin(): Plugin {
 
     async read(context: Context) {
       return testFileInfo();
+    },
+
+    async* watch(context: Context) {
+      yield testChangedFileInfo();
     },
 
     async clean(context: Context) {

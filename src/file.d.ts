@@ -143,3 +143,21 @@ export interface SourceMap {
   mappings: string;
   sourcesContent?: string[];
 }
+
+
+/**
+ * A file that has changed since the previous build.
+ */
+export interface ChangedFileInfo extends FileInfo {
+  change: FileChange;
+}
+
+
+/**
+ * The types of file changes that can be tracked by CodeEngine.
+ */
+export const enum FileChange {
+  Created = "created",
+  Modified = "modified",
+  Deleted = "deleted",
+}

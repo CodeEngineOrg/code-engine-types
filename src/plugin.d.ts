@@ -1,5 +1,5 @@
 import { Context } from "./context";
-import { File, FileInfo } from "./file";
+import { ChangedFileInfo, File, FileInfo } from "./file";
 import { Filter } from "./filters";
 import { AsyncAllIterable } from "./iterate";
 import { ModuleDefinition } from "./module-definition";
@@ -53,7 +53,7 @@ export interface Plugin {
   /**
    * Watches source files and notifies CodeEngine when changes are detected.
    */
-  watch?(context: Context): AsyncIterable<FileInfo> | AsyncIterator<FileInfo>;
+  watch?(context: Context): AsyncIterable<ChangedFileInfo> | AsyncIterator<ChangedFileInfo>;
 
   /**
    * Deletes existing files from the destination, in preparation for a clean build.
