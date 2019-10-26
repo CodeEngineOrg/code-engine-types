@@ -2,10 +2,10 @@
 import { Logger, LogLevel } from "../..";
 
 export function testLogLevel(): LogLevel {
-  let level: LogLevel = "debug";
-  level = "info";
-  level = "warning";
-  return "error";
+  let level: LogLevel = LogLevel.Debug;
+  level = LogLevel.Info;
+  level = LogLevel.Warning;
+  return LogLevel.Error;
 }
 
 export function testLogger(): Logger {

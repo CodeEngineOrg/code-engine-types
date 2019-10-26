@@ -3,8 +3,10 @@ import { EventName, LogEventData } from "../../";
 import { testLogLevel } from "./logger.spec";
 
 export function testEventName(): EventName {
-  let name: EventName = "log";
-  name = "error";
+  let name: EventName = EventName.Log;
+  name = EventName.Error;
+  name = EventName.BuildStarting;
+  name = EventName.BuildFinished;
   return name;
 }
 

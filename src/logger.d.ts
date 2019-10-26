@@ -1,7 +1,12 @@
 /**
  * The possible severity levels of a log message.
  */
-export type LogLevel = "debug" | "info" | "warning" | "error";
+export const enum LogLevel {
+  Debug = "debug",
+  Info = "info",
+  Warning = "warning",
+  Error = "error",
+}
 
 
 /**
