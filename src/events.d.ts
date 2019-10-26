@@ -1,3 +1,6 @@
+import { BuildSummary } from "./build-summary";
+import { Context } from "./context";
+import { FileInfo } from "./file";
 import { LogLevel } from "./logger";
 
 /**
@@ -19,3 +22,18 @@ export interface LogEventData {
   error?: Error;
   [key: string]: unknown;
 }
+
+/**
+ * The data that is emitted for a CodeEngine "BuildStarting" event.
+ */
+export interface BuildStartingEventData extends Context {
+  /**
+   * The files that were changed and triggered the build. This only applies for partial builds.
+   */
+  changedFiles: FileInfo[];
+}
+
+/**
+ * The data that is emitted for a CodeEngine "BuildFinished" event.
+ */
+export interface BuildFinishedEventData extends BuildStartingEventData, BuildSummary {}
