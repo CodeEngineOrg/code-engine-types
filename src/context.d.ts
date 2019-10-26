@@ -15,6 +15,11 @@ export interface Context {
   readonly cwd: string;
 
   /**
+   * The number of files that CodeEngine can process concurrently.
+   */
+  concurrency: number;
+
+  /**
    * Indicates whether CodeEngine should run in local development mode.
    * When `true`, plugins should generate files that are un-minified, un-obfuscated, and may
    * contain references to localhost.
