@@ -148,6 +148,14 @@ export interface SourceMap {
 /**
  * A file that has changed since the previous build.
  */
+export interface ChangedFile extends File {
+  change: FileChange;
+}
+
+
+/**
+ * The information necessary to notify CodeEngine that a file has changed.
+ */
 export interface ChangedFileInfo extends FileInfo {
   change: FileChange;
 }

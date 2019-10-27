@@ -1,5 +1,5 @@
 // tslint:disable: completed-docs
-import { AnyContents, ChangedFileInfo, File, FileChange, FileInfo, FileMetadata, SourceMap } from "../../";
+import { AnyContents, ChangedFile, ChangedFileInfo, File, FileChange, FileInfo, FileMetadata, SourceMap } from "../../";
 import { testCloneable } from "./cloneable.spec";
 
 export function testFile(): File {
@@ -63,6 +63,13 @@ export function testSourceMap(): SourceMap {
     sourcesContent: [
       "export class Foo { bar() {} }"
     ],
+  };
+}
+
+export function testChangedFile(): ChangedFile {
+  return {
+    ...testFile(),
+    change: testFileChange(),
   };
 }
 
