@@ -16,9 +16,10 @@
     "type": "git",
     "url": "https://github.com/CodeEngineOrg/code-engine-types.git"
   },
-  "main": "src/index.d.ts",
+  "main": "index.js",
   "types": "src/index.d.ts",
   "files": [
+    "index.js",
     "src"
   ],
   "scripts": {
