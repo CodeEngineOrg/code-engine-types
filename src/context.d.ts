@@ -1,3 +1,4 @@
+import { ChangedFile } from "./file";
 import { Logger } from "./logger";
 
 /**
@@ -31,4 +32,26 @@ export interface Context {
    * and error stack traces.
    */
   readonly debug: boolean;
+}
+
+/**
+ * Contextual information about the current build.
+ */
+export interface BuildContext extends Context {
+  /**
+   * Indicates whether this is a full build (as opposed to a partial re-build).
+   */
+  fullBuild: boolean;
+
+  /**
+   * Indicates whether this is a partial build, which only includes files that have changed
+   * since the previous build.
+   */
+  partialBuild: boolean;
+
+  /**
+   * The file changes that have occurred since the previous build. For full builds this array
+   * is empty.
+   */
+  changedFiles: ChangedFile[];
 }

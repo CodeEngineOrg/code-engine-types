@@ -1,8 +1,7 @@
 // tslint:disable: completed-docs
-import { BuildFinishedEventData, BuildStartingEventData, EventName, LogEventData } from "../../";
+import { BuildFinishedEventData, EventName, LogEventData } from "../../";
 import { testBuildSummary } from "./build-summary.spec";
-import { testContext } from "./context.spec";
-import { testChangedFileInfo } from "./file.spec";
+import { testBuildContext } from "./context.spec";
 import { testLogLevel } from "./logger.spec";
 
 export function testEventName(): EventName {
@@ -23,22 +22,9 @@ export function testLogEventData(): LogEventData {
   };
 }
 
-export function testBuildStartingEventData(): BuildStartingEventData {
-  return {
-    ...testContext(),
-    fullBuild: false,
-    partialBuild: true,
-    changedFiles: [
-      testChangedFileInfo(),
-      testChangedFileInfo(),
-      testChangedFileInfo(),
-    ],
-  };
-}
-
 export function testBuildFinishedEventData(): BuildFinishedEventData {
   return {
-    ...testBuildStartingEventData(),
+    ...testBuildContext(),
     ...testBuildSummary(),
   };
 }

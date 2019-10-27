@@ -1,6 +1,5 @@
 import { BuildSummary } from "./build-summary";
-import { Context } from "./context";
-import { ChangedFileInfo } from "./file";
+import { BuildContext } from "./context";
 import { LogLevel } from "./logger";
 
 /**
@@ -24,28 +23,6 @@ export interface LogEventData {
 }
 
 /**
- * The data that is emitted for a CodeEngine "BuildStarting" event.
- */
-export interface BuildStartingEventData extends Context {
-  /**
-   * Indicates whether this is a full build (as opposed to a partial re-build).
-   */
-  fullBuild: boolean;
-
-  /**
-   * Indicates whether this is a partial build, which only includes files that have changed
-   * since the previous build.
-   */
-  partialBuild: boolean;
-
-  /**
-   * The file changes that have occurred since the previous build. For full builds this array
-   * is empty.
-   */
-  changedFiles: ChangedFileInfo[];
-}
-
-/**
  * The data that is emitted for a CodeEngine "BuildFinished" event.
  */
-export interface BuildFinishedEventData extends BuildStartingEventData, BuildSummary {}
+export interface BuildFinishedEventData extends BuildContext, BuildSummary {}
