@@ -1,4 +1,4 @@
-import { Context } from "./context";
+import { BuildContext, Context } from "./context";
 import { ChangedFileInfo, File, FileInfo } from "./file";
 import { Filter } from "./filters";
 import { AsyncAllIterable } from "./iterate";
@@ -43,12 +43,12 @@ export interface Plugin {
    * Processes all files that match the plugin's `filter` criteria. This method is called even if no
    * files match the `filter` criteria.
    */
-  processFiles?(files: AsyncAllIterable<File>, context: Context): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
+  processFiles?(files: AsyncAllIterable<File>, context: BuildContext): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
 
   /**
    * Reads source files to be built.
    */
-  read?(context: Context): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
+  read?(context: BuildContext): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
 
   /**
    * Watches source files and notifies CodeEngine when changes are detected.

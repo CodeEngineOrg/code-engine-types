@@ -6,3 +6,6 @@ extends:
   - tslint-modular/best-practices
   - tslint-modular/style
   - tslint-modular/node
+
+rules:
+  max-line-length: false
