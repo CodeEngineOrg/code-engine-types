@@ -1,6 +1,6 @@
 {
   "name": "@code-engine/types",
-  "version": "1.0.0-beta.7",
+  "version": "0.0.1",
   "description": "TypeScript type definitions for CodeEngine",
   "keywords": [
     "code-engine",
@@ -29,7 +29,7 @@
     "test": "npm run test:typescript && npm run lint",
     "test:typescript": "tsc --noEmit test/specs/index.spec.ts",
     "upgrade": "npm-check -u && npm audit fix",
-    "bump": "bump prerelease --tag --push --all",
+    "bump": "bump --tag --push --all",
     "release": "npm run upgrade && npm run build && npm test && npm run bump"
   },
   "engines": {
