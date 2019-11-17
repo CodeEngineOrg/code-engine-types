@@ -53,7 +53,7 @@ export interface Plugin {
   /**
    * Watches source files and notifies CodeEngine when changes are detected.
    */
-  watch?(context: Context): AsyncIterable<ChangedFileInfo> | AsyncIterator<ChangedFileInfo>;
+  watch?(context: Context): AsyncIterable<ChangedFileInfo> | AsyncIterator<ChangedFileInfo> | Promise<AsyncIterable<ChangedFileInfo> | AsyncIterator<ChangedFileInfo>>;
 
   /**
    * Deletes existing files from the destination, in preparation for a clean build.

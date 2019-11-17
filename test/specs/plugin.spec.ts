@@ -89,6 +89,38 @@ export function testAsyncPlugin(): Plugin {
   };
 }
 
+export function testAsyncIterableWatchPlugin(): Plugin {
+  return {
+    name: "My Plugin",
+
+    async watch(context: Context) {
+      return {
+        [Symbol.asyncIterator]() {
+          return {
+            async next() {
+              return { value: testChangedFileInfo() };
+            }
+          };
+        }
+      };
+    },
+  };
+}
+
+export function testAsyncIteratorWatchPlugin(): Plugin {
+  return {
+    name: "My Plugin",
+
+    async watch(context: Context) {
+      return {
+        async next() {
+          return { value: testChangedFileInfo() };
+        }
+      };
+    },
+  };
+}
+
 export function testGeneratorPlugin(): Plugin {
   return {
     name: "My Plugin",
