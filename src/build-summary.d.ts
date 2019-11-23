@@ -42,4 +42,9 @@ export interface BuildSummary {
      */
     elapsed: number;
   };
+
+  /**
+   * If the build failed, then this is the error that occurred.
+   */
+  error?: Error;
 }
