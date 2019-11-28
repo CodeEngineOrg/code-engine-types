@@ -37,7 +37,7 @@
   },
   "engineStrict": true,
   "devDependencies": {
-    "@types/node": "^12.12.12",
+    "@types/node": "^12.12.14",
     "npm-check": "^5.9.0",
     "tslint": "^5.20.1",
     "tslint-modular": "^1.4.1",
