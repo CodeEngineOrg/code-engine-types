@@ -4,7 +4,6 @@ export * from "./context";
 export * from "./events";
 export * from "./file";
 export * from "./filters";
-export * from "./iterate";
 export * from "./logger";
 export * from "./module-definition";
 export * from "./plugin";

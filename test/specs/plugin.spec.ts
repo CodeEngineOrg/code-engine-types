@@ -1,5 +1,5 @@
 // tslint:disable: completed-docs no-async-without-await
-import { AsyncAllIterable, Context, File, Plugin, PluginDefinition } from "../..";
+import { Context, File, Plugin, PluginDefinition } from "../..";
 import { testChangedFileInfo, testFileInfo } from "./file.spec";
 import { testFilter } from "./filters.spec";
 import { testModuleDefinition } from "./module-definition.spec";
@@ -39,7 +39,7 @@ export function testSyncPlugin(): Plugin {
       return testFileInfo();
     },
 
-    processFiles(files: AsyncAllIterable<File>, context: Context) {
+    processFiles(files: AsyncIterable<File>, context: Context) {
       return testFileInfo();
     },
 
@@ -67,7 +67,7 @@ export function testAsyncPlugin(): Plugin {
       return testFileInfo();
     },
 
-    async processFiles(files: AsyncAllIterable<File>, context: Context) {
+    async processFiles(files: AsyncIterable<File>, context: Context) {
       return testFileInfo();
     },
 
@@ -131,7 +131,7 @@ export function testGeneratorPlugin(): Plugin {
       yield testFileInfo();
     },
 
-    * processFiles(files: AsyncAllIterable<File>, context: Context) {
+    * processFiles(files: AsyncIterable<File>, context: Context) {
       yield testFileInfo();
     },
 
@@ -151,7 +151,7 @@ export function testAsyncGeneratorPlugin(): Plugin {
       yield testFileInfo();
     },
 
-    async* processFiles(files: AsyncAllIterable<File>, context: Context) {
+    async* processFiles(files: AsyncIterable<File>, context: Context) {
       yield testFileInfo();
     },
 
