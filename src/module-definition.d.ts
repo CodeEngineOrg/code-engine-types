@@ -1,24 +1,30 @@
 import { Cloneable } from "./cloneable";
 
 /**
- * A JavaScript module whose default export is a `FileProcessor` or `FileProcessorFactory`.
+ * A JavaScript module that exports a value of type `T`, or exports a `FactoryFunction` that
+ * produces a value of type `T`.
  */
-export interface ModuleDefinition {
+export interface ModuleDefinition<T> {
   /**
    * A JavaScript module ID, such as the path of a JavaScript file or the name of an NPM package.
-   * The module's default export must be a `FileProcessor` or `FileProcessorFactory`.
+   * The module's default export must be of type `T` or `FactoryFunction<T>`.
    */
   moduleId: string;
 
   /**
-   * If the module's default export is a `FileProcessorFactory`, then this data will be passed when
-   * calling the factory function. This data can only contain types that are compatible with the
+   * If the module's default export is a `FactoryFunction`, then this data will be passed when
+   * calling the function. This data can only contain types that are compatible with the
    * Structured Clone Algoritm.
-   *
-   * NOTE: If `data` is `undefined`, then the module must export a `FileProcessor` directly, not
-   * a `FileProcessorFactory`.
    *
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm
    */
   data?: Cloneable;
 }
+
+
+/**
+ * A function that returns a value of type `T`.
+ *
+ * @param data - User-defined data that is passed to the factory function.
+ */
+export type FactoryFunction<T = unknown> = (data: unknown) => T | Promise<T>;

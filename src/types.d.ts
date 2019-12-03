@@ -19,12 +19,3 @@ export type ZeroOrMore<T> = void | T | Iterable<T> | Iterator<T> | AsyncIterable
  * or a falsy value to remove the input file from the build.
  */
 export type FileProcessor = (file: File, context: BuildContext) => ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
-
-
-/**
- * A function that returns a `FileProcessor`. The default export of a `ModuleDefinition` must
- * match this signature.
- *
- * @param data - The `ModuleDefinition.data` value
- */
-export type FileProcessorFactory = (data: unknown) => FileProcessor | Promise<FileProcessor>;

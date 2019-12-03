@@ -8,7 +8,7 @@ import { FileProcessor, ZeroOrMore } from "./types";
 /**
  * Plugins can be defined as objects or as shorthand for the `processFile()` method.
  */
-export type PluginDefinition = Plugin | FileProcessor | ModuleDefinition | string;
+export type PluginDefinition = Plugin | FileProcessor | string | ModuleDefinition<FileProcessor>;
 
 
 /**
@@ -36,7 +36,7 @@ export interface Plugin {
    * - An object containing the path of a JavaScript module or Node package, as well as data to pass to it
    *
    */
-  processFile?: string | ModuleDefinition | FileProcessor;
+  processFile?: FileProcessor | string | ModuleDefinition<FileProcessor>;
 
   /**
    * Processes all files that match the plugin's `filter` criteria. This method is called even if no

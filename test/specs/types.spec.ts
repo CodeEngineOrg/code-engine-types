@@ -1,5 +1,5 @@
 // tslint:disable: completed-docs no-async-without-await
-import { Context, File, FileInfo, FileProcessor, FileProcessorFactory, ZeroOrMore } from "../../";
+import { Context, File, FileInfo, FileProcessor, ZeroOrMore } from "../../";
 import { testFileInfo } from "./file.spec";
 
 export function testZeroOrMore(): ZeroOrMore<FileInfo> {
@@ -23,10 +23,4 @@ export function testZeroOrMore(): ZeroOrMore<FileInfo> {
 
 export function testFileProcessor(): FileProcessor {
   return (file: File, context: Context) => testZeroOrMore();
-}
-
-export function testFileProcessorFactory(): FileProcessorFactory {
-  return (data: object) => {
-    return (file: File, context: Context) => testZeroOrMore();
-  };
 }
