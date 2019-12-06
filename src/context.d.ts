@@ -6,11 +6,6 @@ import { Logger } from "./logger";
  */
 export interface Context {
   /**
-   * Used to log messages and errors
-   */
-  readonly logger: Logger;
-
-  /**
    * The directory that should be used to resolve all relative paths.
    */
   readonly cwd: string;
@@ -32,6 +27,11 @@ export interface Context {
    * and error stack traces.
    */
   readonly debug: boolean;
+
+  /**
+   * logs messages and errors
+   */
+  readonly log: Logger;
 }
 
 /**

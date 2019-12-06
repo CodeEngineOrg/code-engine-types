@@ -5,7 +5,7 @@ import { testLogger } from "./logger.spec";
 
 export function testContext(): Context {
   return {
-    logger: testLogger(),
+    log: testLogger(),
     cwd: process.cwd(),
     concurrency: 5,
     dev: true,

@@ -9,10 +9,12 @@ export function testLogLevel(): LogLevel {
 }
 
 export function testLogger(): Logger {
-  return {
-    log(message: string, data?: object) { return; },
-    debug(message: string, data?: object) { return; },
-    warn(warning: string | Error, data?: object) { return; },
-    error(error: string | Error, data?: object) { return; },
-  };
+  // tslint:disable-next-line: no-empty
+  function log(message: string | Error, data?: object): void {}
+  log.info = (message: string, data?: object) => undefined;
+  log.debug = (message: string, data?: object) => undefined;
+  log.warn = (warning: string | Error, data?: object) => undefined;
+  log.error = (error: string | Error, data?: object) => undefined;
+
+  return log;
 }

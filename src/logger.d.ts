@@ -10,16 +10,36 @@ export const enum LogLevel {
 
 
 /**
- * Writes log messages
+ * Logs messages and errors
  */
 export interface Logger {
+  /**
+   * Logs a message.
+   *
+   * This is a shortcut for `log.info()`.
+   *
+   * @param message - The message to log
+   * @param data - An optional POJO containing additional information
+   */
+  (message: string, data?: object): void;
+
+  /**
+   * Logs an error.
+   *
+   * This is a shortcut for `log.error()`.
+   *
+   * @param error - The error to log
+   * @param data - An optional POJO containing additional information
+   */
+  (error: Error, data?: object): void;
+
   /**
    * Logs a message.
    *
    * @param message - The message to log
    * @param data - An optional POJO containing additional information
    */
-  log(message: string, data?: object): void;
+  info(message: string, data?: object): void;
 
   /**
    * Logs a message, only if debug mode is enabled.
@@ -38,7 +58,7 @@ export interface Logger {
   warn(warning: string | Error, data?: object): void;
 
   /**
-   * Logs an error
+   * Logs an error.
    *
    * @param error - The error to log
    * @param data - An optional POJO containing additional information
