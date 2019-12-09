@@ -1,6 +1,6 @@
 {
   "name": "@code-engine/types",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "TypeScript type definitions for CodeEngine",
   "keywords": [
     "code-engine",
@@ -37,7 +37,7 @@
   },
   "engineStrict": true,
   "devDependencies": {
-    "@types/node": "^12.12.14",
+    "@types/node": "^12.12.15",
     "npm-check": "^5.9.0",
     "tslint": "^5.20.1",
     "tslint-modular": "^1.4.1",
