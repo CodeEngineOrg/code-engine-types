@@ -1,6 +1,14 @@
 CodeEngine type definitions
 ======================================
 
+[![Cross-Platform Compatibility](https://engine.codes/img/badges/os-badges.svg)](https://travis-ci.com/CodeEngineOrg/code-engine-types)
+[![Build Status](https://api.travis-ci.com/CodeEngineOrg/code-engine-types.svg?branch=master)](https://travis-ci.com/CodeEngineOrg/code-engine-types)
+
+[![npm](https://img.shields.io/npm/v/@code-engine/types.svg)](https://www.npmjs.com/package/@code-engine/types)
+[![License](https://img.shields.io/npm/l/@code-engine/types.svg)](LICENSE)
+
+
+
 This is a TypeScript type definition library that's used inside [CodeEngine](https://engine.codes/). It contains common type definitions that are used across many CodeEngine packages. In addition, each CodeEngine package may have its own type definitions that are specific to that package.
 
 > **NOTE:** This is an **internal library** that is only intended to be used by CodeEngine. Using it outside of CodeEngine is discouraged.
