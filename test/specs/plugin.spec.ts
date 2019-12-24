@@ -1,5 +1,5 @@
 // tslint:disable: completed-docs no-async-without-await
-import { Context, File, Plugin, PluginDefinition } from "../..";
+import { BuildContext, BuildFinishedEventData, Context, File, LogEventData, Plugin, PluginDefinition } from "../..";
 import { testChangedFileInfo, testFileInfo } from "./file.spec";
 import { testFilter } from "./filters.spec";
 import { testModuleDefinition } from "./module-definition.spec";
@@ -54,6 +54,22 @@ export function testSyncPlugin(): Plugin {
     dispose(context: Context) {
       return;
     },
+
+    onBuildStarting(context: BuildContext) {
+      return;
+    },
+
+    onBuildFinished(summary: BuildFinishedEventData) {
+      return;
+    },
+
+    onError(error: Error) {
+      return;
+    },
+
+    onLog(data: LogEventData) {
+      return;
+    },
   };
 }
 
@@ -64,27 +80,47 @@ export function testAsyncPlugin(): Plugin {
     filter: testFilter(),
 
     async processFile(file: File, context: Context) {
+      await Promise.resolve();
       return testFileInfo();
     },
 
     async processFiles(files: AsyncIterable<File>, context: Context) {
+      await Promise.resolve();
       return testFileInfo();
     },
 
     async read(context: Context) {
+      await Promise.resolve();
       return testFileInfo();
     },
 
     async* watch(context: Context) {
+      await Promise.resolve();
       yield testChangedFileInfo();
     },
 
     async clean(context: Context) {
-      return;
+      await Promise.resolve();
     },
 
     async dispose(context: Context) {
-      return;
+      await Promise.resolve();
+    },
+
+    async onBuildStarting(context: BuildContext) {
+      await Promise.resolve();
+    },
+
+    async onBuildFinished(summary: BuildFinishedEventData) {
+      await Promise.resolve();
+    },
+
+    async onError(error: Error) {
+      await Promise.resolve();
+    },
+
+    async onLog(data: LogEventData) {
+      await Promise.resolve();
     },
   };
 }

@@ -1,4 +1,5 @@
 import { BuildContext, Context } from "./context";
+import { BuildFinishedEventData, LogEventData } from "./events";
 import { ChangedFileInfo, File, FileInfo } from "./file";
 import { Filter } from "./filters";
 import { ModuleDefinition } from "./module-definition";
@@ -64,4 +65,28 @@ export interface Plugin {
    * Once disposed, a plugin is no longer usable by CodeEngine.
    */
   dispose?(context: Context): void | Promise<void>;
+
+  /**
+   * This event is fired whenever a build starts. It receives a `BuildContext` object,
+   * which has information about the build.
+   */
+  onBuildStarting?(context: BuildContext): void | Promise<void>;
+
+  /**
+   * This event is fired when a build completes. It receives a `BuildSummary` object
+   * with the results of the build.
+   */
+  onBuildFinished?(summary: BuildFinishedEventData): void | Promise<void>;
+
+  /**
+   * This event is fired whenever an unhandled error occurs.
+   */
+  onError?(error: Error): void | Promise<void>;
+
+  /**
+   * This event is fired whenever CodeEngine or a plugin calls any `Logger` method.
+   * It receives the message that was logged, the severity level, the error (if any),
+   * and any other data that was provided.
+   */
+  onLog?(data: LogEventData): void | Promise<void>;
 }
