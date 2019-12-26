@@ -70,23 +70,23 @@ export interface Plugin {
    * This event is fired whenever a build starts. It receives a `BuildContext` object,
    * which has information about the build.
    */
-  onBuildStarting?(context: BuildContext): void | Promise<void>;
+  onBuildStarting?(context: BuildContext): void;
 
   /**
    * This event is fired when a build completes. It receives a `BuildSummary` object
    * with the results of the build.
    */
-  onBuildFinished?(summary: BuildFinishedEventData): void | Promise<void>;
+  onBuildFinished?(summary: BuildFinishedEventData): void;
 
   /**
    * This event is fired whenever an unhandled error occurs.
    */
-  onError?(error: Error): void | Promise<void>;
+  onError?(error: Error): void;
 
   /**
    * This event is fired whenever CodeEngine or a plugin calls any `Logger` method.
    * It receives the message that was logged, the severity level, the error (if any),
    * and any other data that was provided.
    */
-  onLog?(data: LogEventData): void | Promise<void>;
+  onLog?(data: LogEventData): void;
 }
