@@ -13,7 +13,7 @@ export interface Context {
   /**
    * The number of files that CodeEngine can process concurrently.
    */
-  concurrency: number;
+  readonly concurrency: number;
 
   /**
    * Indicates whether CodeEngine should run in local development mode.
@@ -41,17 +41,17 @@ export interface BuildContext extends Context {
   /**
    * Indicates whether this is a full build (as opposed to a partial re-build).
    */
-  fullBuild: boolean;
+  readonly fullBuild: boolean;
 
   /**
    * Indicates whether this is a partial build, which only includes files that have changed
    * since the previous build.
    */
-  partialBuild: boolean;
+  readonly partialBuild: boolean;
 
   /**
    * The file changes that have occurred since the previous build. For full builds this array
    * is empty.
    */
-  changedFiles: ChangedFile[];
+  readonly changedFiles: ReadonlyArray<Readonly<ChangedFile>>;
 }
