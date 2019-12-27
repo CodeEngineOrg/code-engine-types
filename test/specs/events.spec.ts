@@ -1,7 +1,5 @@
 // tslint:disable: completed-docs
-import { BuildFinishedEventData, EventName, LogEventData } from "../../";
-import { testBuildSummary } from "./build-summary.spec";
-import { testBuildContext } from "./context.spec";
+import { EventName, LogEventData } from "../../";
 import { testLogLevel } from "./logger.spec";
 
 export function testEventName(): EventName {
@@ -19,12 +17,5 @@ export function testLogEventData(): LogEventData {
     error: new Error(),
     foo: "bar",
     baz: 42,
-  };
-}
-
-export function testBuildFinishedEventData(): BuildFinishedEventData {
-  return {
-    ...testBuildContext(),
-    ...testBuildSummary(),
   };
 }

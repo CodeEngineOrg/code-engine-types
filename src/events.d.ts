@@ -1,5 +1,3 @@
-import { BuildSummary } from "./build-summary";
-import { BuildContext } from "./context";
 import { LogLevel } from "./logger";
 
 /**
@@ -21,8 +19,3 @@ export interface LogEventData {
   error?: Error;
   [key: string]: unknown;
 }
-
-/**
- * The data that is emitted for a CodeEngine "BuildFinished" event.
- */
-export interface BuildFinishedEventData extends BuildContext, BuildSummary {}

@@ -1,6 +1,7 @@
+import { BuildSummary } from "./build-summary";
 import { BuildContext, Context } from "./context";
-import { BuildFinishedEventData, LogEventData } from "./events";
-import { ChangedFileInfo, File, FileInfo } from "./file";
+import { LogEventData } from "./events";
+import { ChangedFile, ChangedFileInfo, File, FileInfo } from "./file";
 import { Filter } from "./filters";
 import { ModuleDefinition } from "./module-definition";
 import { FileProcessor, ZeroOrMore } from "./types";
@@ -76,17 +77,17 @@ export interface Plugin {
    * This event is fired when a build completes. It receives a `BuildSummary` object
    * with the results of the build.
    */
-  onBuildFinished?(summary: BuildFinishedEventData): void;
+  onBuildFinished?(summary: BuildSummary, context: BuildContext): void;
 
   /**
    * This event is fired whenever an unhandled error occurs.
    */
-  onError?(error: Error): void;
+  onError?(error: Error, context: Context): void;
 
   /**
    * This event is fired whenever CodeEngine or a plugin calls any `Logger` method.
    * It receives the message that was logged, the severity level, the error (if any),
    * and any other data that was provided.
    */
-  onLog?(data: LogEventData): void;
+  onLog?(data: LogEventData, context: Context): void;
 }
