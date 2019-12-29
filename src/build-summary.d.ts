@@ -1,7 +1,9 @@
+import { BuildContext } from "./context";
+
 /**
  * A summary of a full or incremental build.
  */
-export interface BuildSummary {
+export interface BuildSummary extends BuildContext {
   input: {
     /**
      * The number of source files that were read at the start of the build.

@@ -77,7 +77,7 @@ export interface Plugin {
    * This event is fired when a build completes. It receives a `BuildSummary` object
    * with the results of the build.
    */
-  onBuildFinished?(summary: BuildSummary, context: BuildContext): void;
+  onBuildFinished?(summary: BuildSummary): void;
 
   /**
    * This event is fired whenever an unhandled error occurs.

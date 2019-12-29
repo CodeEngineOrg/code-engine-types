@@ -59,7 +59,7 @@ export function testSyncPlugin(): Plugin {
       return;
     },
 
-    onBuildFinished(summary: BuildSummary, context: BuildContext) {
+    onBuildFinished(summary: BuildSummary) {
       return;
     },
 
@@ -111,7 +111,7 @@ export function testAsyncPlugin(): Plugin {
       await Promise.resolve();
     },
 
-    async onBuildFinished(summary: BuildSummary, context: Context) {
+    async onBuildFinished(summary: BuildSummary) {
       await Promise.resolve();
     },
 
