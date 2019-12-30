@@ -1,3 +1,4 @@
+// tslint:disable: member-ordering
 import { BuildContext, Context } from "./context";
 import { BuildFinishedEventListener, BuildStartingEventListener, ErrorEventListener, FileChangedEventListener, LogEventListener } from "./events";
 import { ChangedFileInfo, File, FileInfo } from "./file";
