@@ -52,9 +52,9 @@ export interface Plugin {
   read?(context: BuildContext): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
 
   /**
-   * Watches source files and notifies CodeEngine when changes are detected.
+   * Watches source files and notifies CodeEngine whenever changes are detected.
    */
-  watch?(context: Context): AsyncIterable<ChangedFileInfo> | AsyncIterator<ChangedFileInfo> | Promise<AsyncIterable<ChangedFileInfo> | AsyncIterator<ChangedFileInfo>>;
+  watch?: WatchIterable | WatchCallback;
 
   /**
    * Deletes existing files from the destination, in preparation for a clean build.
@@ -96,3 +96,21 @@ export interface Plugin {
    */
   onLog?: LogEventListener;
 }
+
+
+/**
+ * Watches source files for changes and yields a `ChangedFileInfo` object whenever changes are detected.
+ */
+type WatchIterable = (context: Context) => AsyncIterable<ChangedFileInfo> | AsyncIterator<ChangedFileInfo> | Promise<AsyncIterable<ChangedFileInfo> | AsyncIterator<ChangedFileInfo>>;
+
+
+/**
+ * Watches source files for changes and calls the given `FileChangedCallback` whenever changes are detected.
+ */
+type WatchCallback = (context: Context, fileChanged: FileChangedCallback) => void | Promise<void>;
+
+
+/**
+ * A callback function to notify CodeEngine whenever a file change is detected.
+ */
+export type FileChangedCallback = (file: ChangedFileInfo) => void;

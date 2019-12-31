@@ -1,5 +1,5 @@
 // tslint:disable: completed-docs no-async-without-await
-import { BuildContext, BuildSummary, Context, File, LogEventData, Plugin, PluginDefinition } from "../..";
+import { BuildContext, BuildSummary, Context, File, FileChangedCallback, LogEventData, Plugin, PluginDefinition } from "../..";
 import { testChangedFileInfo, testFileInfo } from "./file.spec";
 import { testFilter } from "./filters.spec";
 import { testModuleDefinition } from "./module-definition.spec";
@@ -153,6 +153,27 @@ export function testAsyncIteratorWatchPlugin(): Plugin {
           return { value: testChangedFileInfo() };
         }
       };
+    },
+  };
+}
+
+export function testCallbackWatchPlugin(): Plugin {
+  return {
+    name: "My Plugin",
+
+    watch(context: Context, fileChanged: FileChangedCallback) {
+      fileChanged(testChangedFileInfo());
+    },
+  };
+}
+
+export function testAsyncCallbackWatchPlugin(): Plugin {
+  return {
+    name: "My Plugin",
+
+    async watch(context: Context, fileChanged: FileChangedCallback) {
+      await Promise.resolve();
+      fileChanged(testChangedFileInfo());
     },
   };
 }
