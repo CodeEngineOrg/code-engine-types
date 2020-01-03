@@ -51,6 +51,11 @@ export function testSyncPlugin(): Plugin {
       return;
     },
 
+    *watch(context: Context, fileChanged: FileChangedCallback) {
+      yield testChangedFileInfo();
+      fileChanged(testChangedFileInfo());
+    },
+
     dispose(context: Context) {
       return;
     },
@@ -94,9 +99,10 @@ export function testAsyncPlugin(): Plugin {
       return testFileInfo();
     },
 
-    async* watch(context: Context) {
+    async* watch(context: Context, fileChanged: FileChangedCallback) {
       await Promise.resolve();
       yield testChangedFileInfo();
+      fileChanged(testChangedFileInfo());
     },
 
     async clean(context: Context) {

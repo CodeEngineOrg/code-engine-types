@@ -169,3 +169,9 @@ export const enum FileChange {
   Modified = "modified",
   Deleted = "deleted",
 }
+
+
+/**
+ * A callback function to notify CodeEngine whenever a file change is detected.
+ */
+export type FileChangedCallback = (file: ChangedFileInfo) => void;

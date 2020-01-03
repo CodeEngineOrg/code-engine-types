@@ -1,7 +1,7 @@
 // tslint:disable: member-ordering
 import { BuildContext, Context } from "./context";
 import { BuildFinishedEventListener, BuildStartingEventListener, ErrorEventListener, FileChangedEventListener, LogEventListener } from "./events";
-import { ChangedFileInfo, File, FileInfo } from "./file";
+import { ChangedFileInfo, File, FileChangedCallback, FileInfo } from "./file";
 import { Filter } from "./filters";
 import { ModuleDefinition } from "./module-definition";
 import { FileProcessor, ZeroOrMore } from "./types";
@@ -54,7 +54,7 @@ export interface Plugin {
   /**
    * Watches source files and notifies CodeEngine whenever changes are detected.
    */
-  watch?: WatchIterable | WatchCallback;
+  watch?(context: Context, fileChanged: FileChangedCallback): ZeroOrMore<ChangedFileInfo> | Promise<ZeroOrMore<ChangedFileInfo>>;
 
   /**
    * Deletes existing files from the destination, in preparation for a clean build.
@@ -96,21 +96,3 @@ export interface Plugin {
    */
   onLog?: LogEventListener;
 }
-
-
-/**
- * Watches source files for changes and yields a `ChangedFileInfo` object whenever changes are detected.
- */
-type WatchIterable = (context: Context) => AsyncIterable<ChangedFileInfo> | AsyncIterator<ChangedFileInfo> | Promise<AsyncIterable<ChangedFileInfo> | AsyncIterator<ChangedFileInfo>>;
-
-
-/**
- * Watches source files for changes and calls the given `FileChangedCallback` whenever changes are detected.
- */
-type WatchCallback = (context: Context, fileChanged: FileChangedCallback) => void | Promise<void>;
-
-
-/**
- * A callback function to notify CodeEngine whenever a file change is detected.
- */
-export type FileChangedCallback = (file: ChangedFileInfo) => void;
