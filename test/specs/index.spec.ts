@@ -1,3 +1,4 @@
+export * from "./code-engine.spec";
 export * from "./context.spec";
 export * from "./events.spec";
 export * from "./file.spec";

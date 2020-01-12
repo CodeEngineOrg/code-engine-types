@@ -1,5 +1,6 @@
 export * from "./build-summary";
 export * from "./cloneable";
+export * from "./code-engine";
 export * from "./context";
 export * from "./events";
 export * from "./file";
