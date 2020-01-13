@@ -1,9 +1,9 @@
 // tslint:disable: completed-docs
-import { Context } from "../../";
+import { Run } from "../../src";
 import { testChangedFile } from "./file.spec";
 import { testLogger } from "./logger.spec";
 
-export function testContext(): Context {
+export function testRun(): Run {
   return {
     log: testLogger(),
     cwd: process.cwd(),

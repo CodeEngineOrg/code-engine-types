@@ -1,7 +1,7 @@
 // tslint:disable: completed-docs
-import { Context, FactoryFunction, File, FileProcessor, ModuleDefinition } from "../../";
+import { FactoryFunction, File, FileProcessor, ModuleDefinition, Run } from "../../";
 import { testCloneable } from "./cloneable.spec";
-import { testZeroOrMore } from "./types.spec";
+import { testZeroOrMore } from "./plugin.spec";
 
 export function testModuleDefinition<T>(): ModuleDefinition<T> {
   return {
@@ -25,13 +25,13 @@ export function testModuleDefinitionWithObjectData<T>(): ModuleDefinition<T> {
 
 export function testFileProcessorFactory(): FactoryFunction<FileProcessor> {
   return (data: object): FileProcessor => {
-    return (file: File, context: Context) => testZeroOrMore();
+    return (file: File, run: Run) => testZeroOrMore();
   };
 }
 
 export function testAsyncFileProcessorFactory(): FactoryFunction<FileProcessor> {
   return async (data: object): Promise<FileProcessor> => {
-    return (file: File, context: Context) => testZeroOrMore();
+    return (file: File, run: Run) => testZeroOrMore();
   };
 }
 

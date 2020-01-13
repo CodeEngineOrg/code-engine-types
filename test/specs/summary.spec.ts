@@ -1,10 +1,10 @@
 // tslint:disable: completed-docs
 import { Summary } from "../../src";
-import { testContext } from "./context.spec";
+import { testRun } from "./run.spec";
 
 export function testSummary(): Summary {
   return {
-    ...testContext(),
+    ...testRun(),
     input: {
       fileCount: 123,
       fileSize: 123,

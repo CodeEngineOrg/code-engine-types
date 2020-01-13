@@ -1,12 +1,12 @@
 // tslint:disable: completed-docs no-async-without-await
-import { Context, File, FileChangedCallback, FileInfo, FileProcessor, LogEventData, Plugin, PluginDefinition, Summary, ZeroOrMore } from "../..";
+import { File, FileChangedCallback, FileInfo, FileProcessor, LogEventData, Plugin, PluginDefinition, Run, Summary, ZeroOrMore } from "../..";
 import { testChangedFileInfo, testFileInfo } from "./file.spec";
 import { testFilter } from "./filters.spec";
 import { testModuleDefinition } from "./module-definition.spec";
 
 export function testPluginDefinition(): PluginDefinition {
   let plugin: PluginDefinition = testSyncPlugin();
-  plugin = (file: File, context: Context) => undefined;
+  plugin = (file: File, run: Run) => undefined;
   plugin = testModuleDefinition();
   return "lodash";
 }
@@ -23,7 +23,7 @@ export function testNamedPlugin(): Plugin {
 
 export function testProcessFilePlugin(): Plugin {
   return {
-    processFile(file: File, context: Context) {
+    processFile(file: File, run: Run) {
       return testFileInfo();
     }
   };
@@ -35,32 +35,32 @@ export function testSyncPlugin(): Plugin {
 
     filter: testFilter(),
 
-    processFile(file: File, context: Context) {
+    processFile(file: File, run: Run) {
       return testFileInfo();
     },
 
-    processFiles(files: AsyncIterable<File>, context: Context) {
+    processFiles(files: AsyncIterable<File>, run: Run) {
       return testFileInfo();
     },
 
-    read(context: Context) {
+    read(run: Run) {
       return testFileInfo();
     },
 
-    clean(context: Context) {
+    clean() {
       return;
     },
 
-    *watch(context: Context, fileChanged: FileChangedCallback) {
+    *watch(fileChanged: FileChangedCallback) {
       yield testChangedFileInfo();
       fileChanged(testChangedFileInfo());
     },
 
-    dispose(context: Context) {
+    dispose() {
       return;
     },
 
-    onStart(context: Context) {
+    onStart() {
       return;
     },
 
@@ -68,11 +68,11 @@ export function testSyncPlugin(): Plugin {
       return;
     },
 
-    onError(error: Error, context: Context) {
+    onError(error: Error) {
       return;
     },
 
-    onLog(data: LogEventData, context: Context) {
+    onLog(data: LogEventData) {
       return;
     },
   };
@@ -84,36 +84,36 @@ export function testAsyncPlugin(): Plugin {
 
     filter: testFilter(),
 
-    async processFile(file: File, context: Context) {
+    async processFile(file: File, run: Run) {
       await Promise.resolve();
       return testFileInfo();
     },
 
-    async processFiles(files: AsyncIterable<File>, context: Context) {
+    async processFiles(files: AsyncIterable<File>, run: Run) {
       await Promise.resolve();
       return testFileInfo();
     },
 
-    async read(context: Context) {
+    async read(run: Run) {
       await Promise.resolve();
       return testFileInfo();
     },
 
-    async* watch(context: Context, fileChanged: FileChangedCallback) {
+    async* watch(fileChanged: FileChangedCallback) {
       await Promise.resolve();
       yield testChangedFileInfo();
       fileChanged(testChangedFileInfo());
     },
 
-    async clean(context: Context) {
+    async clean() {
       await Promise.resolve();
     },
 
-    async dispose(context: Context) {
+    async dispose() {
       await Promise.resolve();
     },
 
-    async onStart(context: Context) {
+    async onStart() {
       await Promise.resolve();
     },
 
@@ -121,11 +121,11 @@ export function testAsyncPlugin(): Plugin {
       await Promise.resolve();
     },
 
-    async onError(error: Error, context: Context) {
+    async onError(error: Error) {
       await Promise.resolve();
     },
 
-    async onLog(data: LogEventData, context: Context) {
+    async onLog(data: LogEventData) {
       await Promise.resolve();
     },
   };
@@ -135,7 +135,7 @@ export function testAsyncIterableWatchPlugin(): Plugin {
   return {
     name: "My Plugin",
 
-    async watch(context: Context) {
+    async watch() {
       return {
         [Symbol.asyncIterator]() {
           return {
@@ -153,7 +153,7 @@ export function testAsyncIteratorWatchPlugin(): Plugin {
   return {
     name: "My Plugin",
 
-    async watch(context: Context) {
+    async watch() {
       return {
         async next() {
           return { value: testChangedFileInfo() };
@@ -167,7 +167,7 @@ export function testCallbackWatchPlugin(): Plugin {
   return {
     name: "My Plugin",
 
-    watch(context: Context, fileChanged: FileChangedCallback) {
+    watch(fileChanged: FileChangedCallback) {
       fileChanged(testChangedFileInfo());
     },
   };
@@ -177,7 +177,7 @@ export function testAsyncCallbackWatchPlugin(): Plugin {
   return {
     name: "My Plugin",
 
-    async watch(context: Context, fileChanged: FileChangedCallback) {
+    async watch(fileChanged: FileChangedCallback) {
       await Promise.resolve();
       fileChanged(testChangedFileInfo());
     },
@@ -190,15 +190,15 @@ export function testGeneratorPlugin(): Plugin {
 
     filter: testFilter(),
 
-    * processFile(file: File, context: Context) {
+    * processFile(file: File, run: Run) {
       yield testFileInfo();
     },
 
-    * processFiles(files: AsyncIterable<File>, context: Context) {
+    * processFiles(files: AsyncIterable<File>, run: Run) {
       yield testFileInfo();
     },
 
-    * read(context: Context) {
+    * read(run: Run) {
       yield testFileInfo();
     },
   };
@@ -210,15 +210,15 @@ export function testAsyncGeneratorPlugin(): Plugin {
 
     filter: testFilter(),
 
-    async* processFile(file: File, context: Context) {
+    async* processFile(file: File, run: Run) {
       yield testFileInfo();
     },
 
-    async* processFiles(files: AsyncIterable<File>, context: Context) {
+    async* processFiles(files: AsyncIterable<File>, run: Run) {
       yield testFileInfo();
     },
 
-    async* read(context: Context) {
+    async* read(run: Run) {
       yield testFileInfo();
     },
   };
@@ -244,5 +244,5 @@ export function testZeroOrMore(): ZeroOrMore<FileInfo> {
 }
 
 export function testFileProcessor(): FileProcessor {
-  return (file: File, context: Context) => testZeroOrMore();
+  return (file: File, run: Run) => testZeroOrMore();
 }

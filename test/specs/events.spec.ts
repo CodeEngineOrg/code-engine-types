@@ -1,9 +1,9 @@
 // tslint:disable: completed-docs
 import { EventEmitter } from "events";
-import { ChangedFile, CodeEngineEventEmitter, Context, ErrorEventListener, EventName, FileChangedEventListener, FinishEventListener, LogEventData, LogEventListener, StartEventListener, Summary } from "../../";
-import { testContext } from "./context.spec";
+import { ChangedFile, CodeEngineEventEmitter, ErrorEventListener, EventName, FileChangedEventListener, FinishEventListener, LogEventData, LogEventListener, Run, StartEventListener, Summary } from "../../";
 import { testChangedFile } from "./file.spec";
 import { testLogLevel } from "./logger.spec";
+import { testRun } from "./run.spec";
 import { testSummary } from "./summary.spec";
 
 export function testEventName(): EventName {
@@ -26,7 +26,7 @@ export function testLogEventData(): LogEventData {
 }
 
 export function testStartEventListener(): StartEventListener {
-  return (context: Context) => {
+  return (run: Run) => {
     return;
   };
 }
@@ -38,19 +38,19 @@ export function testFinishEventListener(): FinishEventListener {
 }
 
 export function testFileChangedEventListener(): FileChangedEventListener {
-  return (file: ChangedFile, context: Context) => {
+  return (file: ChangedFile) => {
     return;
   };
 }
 
 export function testErrorEventListener(): ErrorEventListener {
-  return (error: Error, context: Context) => {
+  return (error: Error) => {
     return;
   };
 }
 
 export function testLogEventListener(): LogEventListener {
-  return (data: LogEventData, context: Context) => {
+  return (data: LogEventData) => {
     return;
   };
 }
@@ -112,11 +112,11 @@ export function testCodeEngineEventEmitter(): CodeEngineEventEmitter {
   errorListeners = emitter.rawListeners(EventName.Error);
   logListeners = emitter.rawListeners(EventName.Log);
 
-  emitter.emit(EventName.Start, testContext());
+  emitter.emit(EventName.Start, testRun());
   emitter.emit(EventName.Finish, testSummary());
-  emitter.emit(EventName.FileChanged, testChangedFile(), testContext());
-  emitter.emit(EventName.Error, new Error(), testContext());
-  emitter.emit(EventName.Log, testLogEventData(), testContext());
+  emitter.emit(EventName.FileChanged, testChangedFile());
+  emitter.emit(EventName.Error, new Error());
+  emitter.emit(EventName.Log, testLogEventData());
 
   emitter.removeAllListeners();
   emitter.removeAllListeners(EventName.Start);

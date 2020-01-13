@@ -46,7 +46,7 @@ export interface CodeEngine extends CodeEngineEventEmitter {
   /**
    * Loads one or more CodeEngine plugins.
    */
-  use(...plugins: PluginDefinition[]): this;
+  use(...plugins: PluginDefinition[]): Promise<void>;
 
   /**
    * Imports a JavaScript module in all worker threads.

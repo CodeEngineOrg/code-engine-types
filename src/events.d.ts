@@ -1,7 +1,7 @@
 import { EventEmitter } from "events";
-import { Context } from "./context";
 import { ChangedFile } from "./file";
 import { LogLevel } from "./logger";
+import { Run } from "./run";
 import { Summary } from "./summary";
 
 /**
@@ -16,10 +16,10 @@ export const enum EventName {
 }
 
 /**
- * This event is fired whenever a run starts. It receives a `Context` object,
+ * This event is fired whenever a run starts. It receives a `Run` object,
  * which has information about the run.
  */
-export type StartEventListener = (context: Context) => void;
+export type StartEventListener = (run: Run) => void;
 
 /**
  * This event is fired when a run completes. It receives a `Summary` object
@@ -30,19 +30,19 @@ export type FinishEventListener = (summary: Summary) => void;
 /**
  * This event is fired when a file change is detected. It receives a `ChangedFile` object.
  */
-export type FileChangedEventListener = (file: ChangedFile, context: Context) => void;
+export type FileChangedEventListener = (file: ChangedFile) => void;
 
 /**
  * This event is fired whenever an unhandled error occurs.
  */
-export type ErrorEventListener = (error: Error, context: Context) => void;
+export type ErrorEventListener = (error: Error) => void;
 
 /**
  * This event is fired whenever CodeEngine or a plugin calls any `Logger` method.
  * It receives the message that was logged, the severity level, the error (if any),
  * and any other data that was provided.
  */
-export type LogEventListener = (data: LogEventData, context: Context) => void;
+export type LogEventListener = (data: LogEventData) => void;
 
 /**
  * The data that is emitted for a CodeEngine "log" event.
@@ -115,11 +115,11 @@ export interface CodeEngineEventEmitter extends EventEmitter {
   rawListeners(event: EventName.Error): ErrorEventListener[];
   rawListeners(event: EventName.Log): LogEventListener[];
 
-  emit(event: EventName.Start, context: Context): boolean;
-  emit(event: EventName.Finish, context: Summary): boolean;
-  emit(event: EventName.FileChanged, file: ChangedFile, context: Context): boolean;
-  emit(event: EventName.Error, error: Error, context: Context): boolean;
-  emit(event: EventName.Log, data: LogEventData, context: Context): boolean;
+  emit(event: EventName.Start, run: Run): boolean;
+  emit(event: EventName.Finish, summary: Summary): boolean;
+  emit(event: EventName.FileChanged, file: ChangedFile): boolean;
+  emit(event: EventName.Error, error: Error): boolean;
+  emit(event: EventName.Log, data: LogEventData): boolean;
 
   removeAllListeners(event?: EventName): this;
   eventNames(): EventName[];

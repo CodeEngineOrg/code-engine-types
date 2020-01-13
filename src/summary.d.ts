@@ -1,9 +1,9 @@
-import { Context } from "./context";
+import { Run } from "./run";
 
 /**
- * A summary of a full or incremental run.
+ * A summary of a completed CodeEngine run.
  */
-export interface Summary extends Context {
+export interface Summary extends Run {
   input: {
     /**
      * The number of source files that were read at the start of the run.

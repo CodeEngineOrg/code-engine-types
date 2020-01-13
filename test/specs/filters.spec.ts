@@ -1,5 +1,5 @@
 // tslint:disable: completed-docs
-import { Context, File, Filter, FilterCriteria, FilterFunction, Filters, PathFilter } from "../../";
+import { File, Filter, FilterCriteria, FilterFunction, Filters, PathFilter, Run } from "../../";
 
 export function testPathFilter(): PathFilter {
   let filter: PathFilter = true;
@@ -9,7 +9,7 @@ export function testPathFilter(): PathFilter {
 }
 
 export function testFilterFunction(): FilterFunction {
-  return (file: File, context: Context) => 42;
+  return (file: File, run: Run) => 42;
 }
 
 export function testFilterCriteria(): FilterCriteria {

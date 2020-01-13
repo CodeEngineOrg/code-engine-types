@@ -2,9 +2,9 @@ import { ChangedFile } from "./file";
 import { Logger } from "./logger";
 
 /**
- * Contextual information about the current run.
+ * Information about a CodeEngine run.
  */
-export interface Context {
+export interface Run {
   /**
    * Indicates whether this is a full run (as opposed to a partial run).
    */

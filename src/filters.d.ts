@@ -1,5 +1,5 @@
-import { Context } from "./context";
 import { File } from "./file";
+import { Run } from "./run";
 
 /**
  * Filters files by their path.  Can be any of the following:
@@ -14,7 +14,7 @@ export type PathFilter = boolean | string | RegExp;
 /**
  * Custom filter criteria for `File` objects
  */
-export type FilterFunction = (file: File, context: Context) => unknown;
+export type FilterFunction = (file: File, run: Run) => unknown;
 
 
 /**

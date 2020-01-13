@@ -26,9 +26,9 @@ Here are the most significant types in this library:
 |[`FileInfo`](src/file.d.ts)                      |The information necessary to create a `File` object. This is a simple POJO object with mostly optional fields. Plugins can simply return one or more of these objects, and CodeEngine will create full `File` objects from them.
 |[`Plugin`](src/plugin.d.ts)                      |The interface for CodeEngine plugins. Any plugin can implement some or all of the plugin methods to hook into various parts of the CodeEngine lifecycle.
 |[`ModuleDefinition`](src/module-definition.d.ts) |This object references a JavaScript module. It's used to load CodeEngine plugins on worker threads rather than the main thread, which improves performance and throughput in many cases.
-|[`Context`](src/context.d.ts)                    |This object is passed to all plugin methods. It provides contextual information about the run.
-|[`Logger`](src/logger.d.ts)                      |Logging methods that are passed to every plugin method via `context.log`. Plugins should use these logging methods rather than `console.log()` or `process.stdout.write()`.
-|[`Summary`](src/summary.d.ts)         |When a run completes, CodeEngine returns this summary object. It's also emitted via [the "finished" event](src/events.d.ts).
+|[`Run`](src/run.d.ts)                            |Information about the current CodeEngine run. This object is passed to many plugin methods.
+|[`Logger`](src/logger.d.ts)                      |CodeEngine's logging methods. Plugins should use these logging methods rather than `console.log()` or `process.stdout.write()`.
+|[`Summary`](src/summary.d.ts)                    |When a run completes, CodeEngine returns this summary object. It's also emitted via [the "finished" event](src/events.d.ts).
 
 
 

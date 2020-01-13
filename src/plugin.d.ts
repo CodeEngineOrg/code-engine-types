@@ -1,9 +1,9 @@
 // tslint:disable: member-ordering
-import { Context } from "./context";
 import { ErrorEventListener, FileChangedEventListener, FinishEventListener, LogEventListener, StartEventListener } from "./events";
 import { ChangedFileInfo, File, FileChangedCallback, FileInfo } from "./file";
 import { Filter } from "./filters";
 import { ModuleDefinition } from "./module-definition";
+import { Run } from "./run";
 
 /**
  * A CodeEngine plugin
@@ -36,31 +36,31 @@ export interface Plugin {
    * Processes all files that match the plugin's `filter` criteria. This method is called even if no
    * files match the `filter` criteria.
    */
-  processFiles?(files: AsyncIterable<File>, context: Context): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
+  processFiles?(files: AsyncIterable<File>, run: Run): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
 
   /**
    * Reads source files to be built.
    */
-  read?(context: Context): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
+  read?(run: Run): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
 
   /**
    * Watches source files and notifies CodeEngine whenever changes are detected.
    */
-  watch?(context: Context, fileChanged: FileChangedCallback): ZeroOrMore<ChangedFileInfo> | Promise<ZeroOrMore<ChangedFileInfo>>;
+  watch?(fileChanged: FileChangedCallback): ZeroOrMore<ChangedFileInfo> | Promise<ZeroOrMore<ChangedFileInfo>>;
 
   /**
    * Deletes existing files from the destination, in preparation for a clean run.
    */
-  clean?(context: Context): void | Promise<void>;
+  clean?(): void | Promise<void>;
 
   /**
    * Releases system resources, such as filesystem watchers, database connections, network connections, etc.
    * Once disposed, a plugin is no longer usable by CodeEngine.
    */
-  dispose?(context: Context): void | Promise<void>;
+  dispose?(): void | Promise<void>;
 
   /**
-   * This event is fired whenever a run starts. It receives a `Context` object,
+   * This event is fired whenever a run starts. It receives a `Run` object,
    * which has information about the run.
    */
   onStart?: StartEventListener;
@@ -100,13 +100,13 @@ export type ZeroOrMore<T> = void | T | Iterable<T> | Iterator<T> | AsyncIterable
  * Processes an input file and returns zero or more output files.
  *
  * @param file - The file to process
- * @param context - Information about the current run
+ * @param run - Information about the current run
  *
  * @returns
  * The results of processing `file`. This may be the modified file, a new file, multiple files,
  * or a falsy value to remove the input file from the run.
  */
-export type FileProcessor = (file: File, context: Context) => ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
+export type FileProcessor = (file: File, run: Run) => ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
 
 
 /**
