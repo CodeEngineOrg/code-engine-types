@@ -1,5 +1,5 @@
 // tslint:disable: completed-docs no-async-without-await
-import { BuildContext, BuildSummary, Context, File, FileChangedCallback, LogEventData, Plugin, PluginDefinition } from "../..";
+import { BuildContext, BuildSummary, Context, File, FileChangedCallback, FileInfo, FileProcessor, LogEventData, Plugin, PluginDefinition, ZeroOrMore } from "../..";
 import { testChangedFileInfo, testFileInfo } from "./file.spec";
 import { testFilter } from "./filters.spec";
 import { testModuleDefinition } from "./module-definition.spec";
@@ -222,4 +222,27 @@ export function testAsyncGeneratorPlugin(): Plugin {
       yield testFileInfo();
     },
   };
+}
+
+export function testZeroOrMore(): ZeroOrMore<FileInfo> {
+  let file = testFileInfo();
+  let files: ZeroOrMore<FileInfo>;
+  files = undefined;
+  files = file;
+  files = [file, file, file];
+  files = {
+    next() {
+      return { value: file };
+    }
+  };
+  files = (function* generator() {
+    yield file;
+  })();
+  files = (async function* generator() {
+    yield file;
+  })();
+}
+
+export function testFileProcessor(): FileProcessor {
+  return (file: File, context: Context) => testZeroOrMore();
 }

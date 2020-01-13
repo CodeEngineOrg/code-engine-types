@@ -8,4 +8,3 @@ export * from "./filters.spec";
 export * from "./logger.spec";
 export * from "./module-definition.spec";
 export * from "./plugin.spec";
-export * from "./types.spec";
