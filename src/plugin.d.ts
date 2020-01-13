@@ -1,5 +1,5 @@
 // tslint:disable: member-ordering
-import { ErrorEventListener, FileChangedEventListener, FinishEventListener, LogEventListener, StartEventListener } from "./events";
+import { FileChangedEventListener, FinishEventListener, StartEventListener } from "./events";
 import { ChangedFileInfo, File, FileChangedCallback, FileInfo } from "./file";
 import { Filter } from "./filters";
 import { ModuleDefinition } from "./module-definition";
@@ -16,7 +16,7 @@ export interface Plugin {
 
   /**
    * Glob patterns, regular expressions, or filter functions that limit which files are processed
-   * by the plugin's `processFile()` and `processFiles()` methods.
+   * by the plugin's `processFile()`, `processFiles()`, and `fileChanged()` methods.
    *
    * Defaults to all files.
    */
@@ -60,33 +60,19 @@ export interface Plugin {
   dispose?(): void | Promise<void>;
 
   /**
-   * This event is fired whenever a run starts. It receives a `Run` object,
-   * which has information about the run.
+   * Prepares for the start of a CodeEngine run.
    */
-  onStart?: StartEventListener;
+  start?: StartEventListener;
 
   /**
-   * This event is fired when a run completes. It receives a `Summary` object
-   * with the results of the run.
+   * Wraps-up after a CodeEngine run finishes.
    */
-  onFinish?: FinishEventListener;
+  finish?: FinishEventListener;
 
   /**
-   * This event is fired when a file change is detected. It receives a `ChangedFile` object.
+   * A change has been detected in a file that matches the `filter` criteria.
    */
-  onFileChanged?: FileChangedEventListener;
-
-  /**
-   * This event is fired whenever an unhandled error occurs.
-   */
-  onError?: ErrorEventListener;
-
-  /**
-   * This event is fired whenever CodeEngine or a plugin calls any `Logger` method.
-   * It receives the message that was logged, the severity level, the error (if any),
-   * and any other data that was provided.
-   */
-  onLog?: LogEventListener;
+  fileChanged?: FileChangedEventListener;
 }
 
 
