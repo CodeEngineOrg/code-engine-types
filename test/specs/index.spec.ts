@@ -1,3 +1,5 @@
+export * from "./build-summary.spec";
+export * from "./cloneable.spec";
 export * from "./code-engine.spec";
 export * from "./context.spec";
 export * from "./events.spec";
