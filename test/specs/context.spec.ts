@@ -1,5 +1,5 @@
 // tslint:disable: completed-docs
-import { BuildContext, Context } from "../../";
+import { Context } from "../../";
 import { testChangedFile } from "./file.spec";
 import { testLogger } from "./logger.spec";
 
@@ -10,14 +10,8 @@ export function testContext(): Context {
     concurrency: 5,
     dev: true,
     debug: true,
-  };
-}
-
-export function testBuildContext(): BuildContext {
-  return {
-    ...testContext(),
-    fullBuild: false,
-    partialBuild: true,
+    full: false,
+    partial: true,
     changedFiles: [
       testChangedFile(),
       testChangedFile(),

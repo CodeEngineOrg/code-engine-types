@@ -24,11 +24,11 @@ Here are the most significant types in this library:
 |[`CodeEngine`](src/code-engine.d.ts)             |An instance of CodeEngine. Each instance has its own set of plugins and manages its own pool of worker threads.
 |[`File`](src/file.d.ts)                          |A CodeEngine "file". This does not necessarily correspond to a file on disk. Files are a virtual concept with a path, name, and data contents. Those values could come from a database, a CMS, an RSS feed, or any other source.
 |[`FileInfo`](src/file.d.ts)                      |The information necessary to create a `File` object. This is a simple POJO object with mostly optional fields. Plugins can simply return one or more of these objects, and CodeEngine will create full `File` objects from them.
-|[`Plugin`](src/plugin.d.ts)                      |The interface for CodeEngine plugins. Any plugin can implement some or all of the plugin methods to hook into various parts of the CodeEngine build process.
+|[`Plugin`](src/plugin.d.ts)                      |The interface for CodeEngine plugins. Any plugin can implement some or all of the plugin methods to hook into various parts of the CodeEngine lifecycle.
 |[`ModuleDefinition`](src/module-definition.d.ts) |This object references a JavaScript module. It's used to load CodeEngine plugins on worker threads rather than the main thread, which improves performance and throughput in many cases.
-|[`Context`](src/context.d.ts)                    |This object is passed to all plugin methods. It provides contextual information about the build.
+|[`Context`](src/context.d.ts)                    |This object is passed to all plugin methods. It provides contextual information about the run.
 |[`Logger`](src/logger.d.ts)                      |Logging methods that are passed to every plugin method via `context.log`. Plugins should use these logging methods rather than `console.log()` or `process.stdout.write()`.
-|[`BuildSummary`](src/build-summary.d.ts)         |When a build completes, CodeEngine returns this summary object. It's also emitted via [the "buildFinished" event](src/events.d.ts).
+|[`Summary`](src/summary.d.ts)         |When a run completes, CodeEngine returns this summary object. It's also emitted via [the "finished" event](src/events.d.ts).
 
 
 

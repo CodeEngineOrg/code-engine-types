@@ -1,12 +1,12 @@
-import { BuildContext } from "./context";
+import { Context } from "./context";
 
 /**
- * A summary of a full or incremental build.
+ * A summary of a full or incremental run.
  */
-export interface BuildSummary extends BuildContext {
+export interface Summary extends Context {
   input: {
     /**
-     * The number of source files that were read at the start of the build.
+     * The number of source files that were read at the start of the run.
      */
     fileCount: number;
 
@@ -30,17 +30,17 @@ export interface BuildSummary extends BuildContext {
 
   time: {
     /**
-     * The date/time that the build started.
+     * The date/time that the run started.
      */
     start: Date;
 
     /**
-     * The date/time that the build ended.
+     * The date/time that the run ended.
      */
     end: Date;
 
     /**
-     * How long the build took, in milliseconds.
+     * How long the run took, in milliseconds.
      */
     elapsed: number;
   };

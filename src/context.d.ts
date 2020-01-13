@@ -2,18 +2,19 @@ import { ChangedFile } from "./file";
 import { Logger } from "./logger";
 
 /**
- * Contextual information passed to every plugin hook.
+ * Contextual information about the current run.
  */
 export interface Context {
   /**
-   * The directory that should be used to resolve all relative paths.
+   * Indicates whether this is a full run (as opposed to a partial run).
    */
-  readonly cwd: string;
+  readonly full: boolean;
 
   /**
-   * The number of files that CodeEngine can process concurrently.
+   * Indicates whether this is a partial run, which only includes files that have changed
+   * since the previous run.
    */
-  readonly concurrency: number;
+  readonly partial: boolean;
 
   /**
    * Indicates whether CodeEngine should run in local development mode.
@@ -29,29 +30,23 @@ export interface Context {
   readonly debug: boolean;
 
   /**
+   * The directory that should be used to resolve all relative paths.
+   */
+  readonly cwd: string;
+
+  /**
+   * The number of files that CodeEngine can process concurrently.
+   */
+  readonly concurrency: number;
+
+  /**
+   * The file changes that have occurred since the previous run.
+   * This array will be empty for full runs.
+   */
+  readonly changedFiles: ReadonlyArray<Readonly<ChangedFile>>;
+
+  /**
    * logs messages and errors
    */
   readonly log: Logger;
-}
-
-/**
- * Contextual information about the current build.
- */
-export interface BuildContext extends Context {
-  /**
-   * Indicates whether this is a full build (as opposed to a partial re-build).
-   */
-  readonly fullBuild: boolean;
-
-  /**
-   * Indicates whether this is a partial build, which only includes files that have changed
-   * since the previous build.
-   */
-  readonly partialBuild: boolean;
-
-  /**
-   * The file changes that have occurred since the previous build. For full builds this array
-   * is empty.
-   */
-  readonly changedFiles: ReadonlyArray<Readonly<ChangedFile>>;
 }

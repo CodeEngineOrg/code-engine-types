@@ -1,4 +1,3 @@
-export * from "./build-summary.spec";
 export * from "./cloneable.spec";
 export * from "./code-engine.spec";
 export * from "./context.spec";
@@ -8,3 +7,4 @@ export * from "./filters.spec";
 export * from "./logger.spec";
 export * from "./module-definition.spec";
 export * from "./plugin.spec";
+export * from "./summary.spec";

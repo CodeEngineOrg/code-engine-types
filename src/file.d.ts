@@ -146,7 +146,7 @@ export interface SourceMap {
 
 
 /**
- * A file that has changed since the previous build.
+ * A file that has changed since the previous run.
  */
 export interface ChangedFile extends File {
   change: FileChange;

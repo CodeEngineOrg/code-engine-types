@@ -1,6 +1,6 @@
 // tslint:disable: member-ordering
-import { BuildContext, Context } from "./context";
-import { BuildFinishedEventListener, BuildStartingEventListener, ErrorEventListener, FileChangedEventListener, LogEventListener } from "./events";
+import { Context } from "./context";
+import { ErrorEventListener, FileChangedEventListener, FinishEventListener, LogEventListener, StartEventListener } from "./events";
 import { ChangedFileInfo, File, FileChangedCallback, FileInfo } from "./file";
 import { Filter } from "./filters";
 import { ModuleDefinition } from "./module-definition";
@@ -36,12 +36,12 @@ export interface Plugin {
    * Processes all files that match the plugin's `filter` criteria. This method is called even if no
    * files match the `filter` criteria.
    */
-  processFiles?(files: AsyncIterable<File>, context: BuildContext): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
+  processFiles?(files: AsyncIterable<File>, context: Context): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
 
   /**
    * Reads source files to be built.
    */
-  read?(context: BuildContext): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
+  read?(context: Context): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
 
   /**
    * Watches source files and notifies CodeEngine whenever changes are detected.
@@ -49,7 +49,7 @@ export interface Plugin {
   watch?(context: Context, fileChanged: FileChangedCallback): ZeroOrMore<ChangedFileInfo> | Promise<ZeroOrMore<ChangedFileInfo>>;
 
   /**
-   * Deletes existing files from the destination, in preparation for a clean build.
+   * Deletes existing files from the destination, in preparation for a clean run.
    */
   clean?(context: Context): void | Promise<void>;
 
@@ -60,16 +60,16 @@ export interface Plugin {
   dispose?(context: Context): void | Promise<void>;
 
   /**
-   * This event is fired whenever a build starts. It receives a `BuildContext` object,
-   * which has information about the build.
+   * This event is fired whenever a run starts. It receives a `Context` object,
+   * which has information about the run.
    */
-  onBuildStarting?: BuildStartingEventListener;
+  onStart?: StartEventListener;
 
   /**
-   * This event is fired when a build completes. It receives a `BuildSummary` object
-   * with the results of the build.
+   * This event is fired when a run completes. It receives a `Summary` object
+   * with the results of the run.
    */
-  onBuildFinished?: BuildFinishedEventListener;
+  onFinish?: FinishEventListener;
 
   /**
    * This event is fired when a file change is detected. It receives a `ChangedFile` object.
@@ -100,13 +100,13 @@ export type ZeroOrMore<T> = void | T | Iterable<T> | Iterator<T> | AsyncIterable
  * Processes an input file and returns zero or more output files.
  *
  * @param file - The file to process
- * @param context - Informatino about the current build
+ * @param context - Information about the current run
  *
  * @returns
  * The results of processing `file`. This may be the modified file, a new file, multiple files,
- * or a falsy value to remove the input file from the build.
+ * or a falsy value to remove the input file from the run.
  */
-export type FileProcessor = (file: File, context: BuildContext) => ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
+export type FileProcessor = (file: File, context: Context) => ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
 
 
 /**

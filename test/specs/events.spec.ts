@@ -1,16 +1,16 @@
 // tslint:disable: completed-docs
 import { EventEmitter } from "events";
-import { BuildContext, BuildFinishedEventListener, BuildStartingEventListener, BuildSummary, ChangedFile, CodeEngineEventEmitter, Context, ErrorEventListener, EventName, FileChangedEventListener, LogEventData, LogEventListener } from "../../";
-import { testBuildSummary } from "./build-summary.spec";
-import { testBuildContext, testContext } from "./context.spec";
+import { ChangedFile, CodeEngineEventEmitter, Context, ErrorEventListener, EventName, FileChangedEventListener, FinishEventListener, LogEventData, LogEventListener, StartEventListener, Summary } from "../../";
+import { testContext } from "./context.spec";
 import { testChangedFile } from "./file.spec";
 import { testLogLevel } from "./logger.spec";
+import { testSummary } from "./summary.spec";
 
 export function testEventName(): EventName {
   let name: EventName = EventName.Log;
   name = EventName.Error;
-  name = EventName.BuildStarting;
-  name = EventName.BuildFinished;
+  name = EventName.Start;
+  name = EventName.Finish;
   name = EventName.FileChanged;
   return name;
 }
@@ -25,14 +25,14 @@ export function testLogEventData(): LogEventData {
   };
 }
 
-export function testBuildStartingEventListener(): BuildStartingEventListener {
-  return (context: BuildContext) => {
+export function testStartEventListener(): StartEventListener {
+  return (context: Context) => {
     return;
   };
 }
 
-export function testBuildFinishedEventListener(): BuildFinishedEventListener {
-  return (summary: BuildSummary) => {
+export function testFinishEventListener(): FinishEventListener {
+  return (summary: Summary) => {
     return;
   };
 }
@@ -58,75 +58,75 @@ export function testLogEventListener(): LogEventListener {
 export function testCodeEngineEventEmitter(): CodeEngineEventEmitter {
   let emitter = new EventEmitter() as CodeEngineEventEmitter;
 
-  emitter.addListener(EventName.BuildStarting, testBuildStartingEventListener());
-  emitter.addListener(EventName.BuildFinished, testBuildFinishedEventListener());
+  emitter.addListener(EventName.Start, testStartEventListener());
+  emitter.addListener(EventName.Finish, testFinishEventListener());
   emitter.addListener(EventName.FileChanged, testFileChangedEventListener());
   emitter.addListener(EventName.Error, testErrorEventListener());
   emitter.addListener(EventName.Log, testLogEventListener());
 
-  emitter.on(EventName.BuildStarting, testBuildStartingEventListener());
-  emitter.on(EventName.BuildFinished, testBuildFinishedEventListener());
+  emitter.on(EventName.Start, testStartEventListener());
+  emitter.on(EventName.Finish, testFinishEventListener());
   emitter.on(EventName.FileChanged, testFileChangedEventListener());
   emitter.on(EventName.Error, testErrorEventListener());
   emitter.on(EventName.Log, testLogEventListener());
 
-  emitter.once(EventName.BuildStarting, testBuildStartingEventListener());
-  emitter.once(EventName.BuildFinished, testBuildFinishedEventListener());
+  emitter.once(EventName.Start, testStartEventListener());
+  emitter.once(EventName.Finish, testFinishEventListener());
   emitter.once(EventName.FileChanged, testFileChangedEventListener());
   emitter.once(EventName.Error, testErrorEventListener());
   emitter.once(EventName.Log, testLogEventListener());
 
-  emitter.prependListener(EventName.BuildStarting, testBuildStartingEventListener());
-  emitter.prependListener(EventName.BuildFinished, testBuildFinishedEventListener());
+  emitter.prependListener(EventName.Start, testStartEventListener());
+  emitter.prependListener(EventName.Finish, testFinishEventListener());
   emitter.prependListener(EventName.FileChanged, testFileChangedEventListener());
   emitter.prependListener(EventName.Error, testErrorEventListener());
   emitter.prependListener(EventName.Log, testLogEventListener());
 
-  emitter.prependOnceListener(EventName.BuildStarting, testBuildStartingEventListener());
-  emitter.prependOnceListener(EventName.BuildFinished, testBuildFinishedEventListener());
+  emitter.prependOnceListener(EventName.Start, testStartEventListener());
+  emitter.prependOnceListener(EventName.Finish, testFinishEventListener());
   emitter.prependOnceListener(EventName.FileChanged, testFileChangedEventListener());
   emitter.prependOnceListener(EventName.Error, testErrorEventListener());
   emitter.prependOnceListener(EventName.Log, testLogEventListener());
 
-  emitter.removeListener(EventName.BuildStarting, testBuildStartingEventListener());
-  emitter.removeListener(EventName.BuildFinished, testBuildFinishedEventListener());
+  emitter.removeListener(EventName.Start, testStartEventListener());
+  emitter.removeListener(EventName.Finish, testFinishEventListener());
   emitter.removeListener(EventName.FileChanged, testFileChangedEventListener());
   emitter.removeListener(EventName.Error, testErrorEventListener());
   emitter.removeListener(EventName.Log, testLogEventListener());
 
-  emitter.off(EventName.BuildStarting, testBuildStartingEventListener());
-  emitter.off(EventName.BuildFinished, testBuildFinishedEventListener());
+  emitter.off(EventName.Start, testStartEventListener());
+  emitter.off(EventName.Finish, testFinishEventListener());
   emitter.off(EventName.FileChanged, testFileChangedEventListener());
   emitter.off(EventName.Error, testErrorEventListener());
   emitter.off(EventName.Log, testLogEventListener());
 
-  let buildStartingListeners: BuildStartingEventListener[] = emitter.listeners(EventName.BuildStarting);
-  let buildFinishedListeners: BuildFinishedEventListener[] = emitter.listeners(EventName.BuildFinished);
+  let startListeners: StartEventListener[] = emitter.listeners(EventName.Start);
+  let finishListeners: FinishEventListener[] = emitter.listeners(EventName.Finish);
   let fileChangedListeners: FileChangedEventListener[] = emitter.listeners(EventName.FileChanged);
   let errorListeners: ErrorEventListener[] = emitter.listeners(EventName.Error);
   let logListeners: LogEventListener[] = emitter.listeners(EventName.Log);
 
-  buildStartingListeners = emitter.rawListeners(EventName.BuildStarting);
-  buildFinishedListeners = emitter.rawListeners(EventName.BuildFinished);
+  startListeners = emitter.rawListeners(EventName.Start);
+  finishListeners = emitter.rawListeners(EventName.Finish);
   fileChangedListeners = emitter.rawListeners(EventName.FileChanged);
   errorListeners = emitter.rawListeners(EventName.Error);
   logListeners = emitter.rawListeners(EventName.Log);
 
-  emitter.emit(EventName.BuildStarting, testBuildContext());
-  emitter.emit(EventName.BuildFinished, testBuildSummary());
+  emitter.emit(EventName.Start, testContext());
+  emitter.emit(EventName.Finish, testSummary());
   emitter.emit(EventName.FileChanged, testChangedFile(), testContext());
   emitter.emit(EventName.Error, new Error(), testContext());
   emitter.emit(EventName.Log, testLogEventData(), testContext());
 
   emitter.removeAllListeners();
-  emitter.removeAllListeners(EventName.BuildStarting);
-  emitter.removeAllListeners(EventName.BuildFinished);
+  emitter.removeAllListeners(EventName.Start);
+  emitter.removeAllListeners(EventName.Finish);
   emitter.removeAllListeners(EventName.FileChanged);
   emitter.removeAllListeners(EventName.Error);
   emitter.removeAllListeners(EventName.Log);
 
-  emitter.listenerCount(EventName.BuildStarting);
-  emitter.listenerCount(EventName.BuildFinished);
+  emitter.listenerCount(EventName.Start);
+  emitter.listenerCount(EventName.Finish);
   emitter.listenerCount(EventName.FileChanged);
   emitter.listenerCount(EventName.Error);
   emitter.listenerCount(EventName.Log);
