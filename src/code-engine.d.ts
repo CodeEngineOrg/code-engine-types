@@ -52,12 +52,12 @@ export interface CodeEngine extends CodeEngineEventEmitter {
    * Imports a JavaScript module in all worker threads.
    * This is useful for loading polyfills, transpilers, or other modules that have global side-effects.
    *
-   * @param module - The path or name of the plugin's JavaScript module
-   * @param options - Options that determine the plugin's behavior. Only cloneable data types are allowed.
+   * @param moduleId - The path or name of the plugin's JavaScript module
+   * @param data - Optional data to pass to the module, if its default export is a function
    *
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm
    */
-  import(module: string, options?: Cloneable): Promise<void>;
+  import(moduleId: string, data?: Cloneable): Promise<void>;
 
   /**
    * Deletes the contents of the destination(s).
