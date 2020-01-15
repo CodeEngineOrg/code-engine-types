@@ -1,5 +1,5 @@
 // tslint:disable: completed-docs no-async-without-await
-import { File, FileChangedCallback, FileInfo, FileProcessor, Plugin, PluginDefinition, Run, ZeroOrMore } from "../..";
+import { EventName, File, FileChangedCallback, FileInfo, FileProcessor, Plugin, PluginDefinition, Run, ZeroOrMore } from "../..";
 import { testChangedFileInfo, testFileInfo } from "./file.spec";
 import { testFilter } from "./filters.spec";
 import { testModuleDefinition } from "./module-definition.spec";
@@ -188,6 +188,51 @@ export function testAsyncGeneratorPlugin(): Plugin {
 
     async* read(run: Run) {
       yield testFileInfo();
+    },
+  };
+}
+
+export function testMountedPlugin() {
+  let plugin: Plugin = {
+    name: "My Plugin",
+
+    filter: testFilter(),
+
+    processFile(file: File, run: Run) {
+      file.dir = this.engine.cwd;
+      return file;
+    },
+
+    async* processFiles(files: AsyncIterable<File>, run: Run) {
+      for await (let file of files) {
+        if (this.engine.dev) {
+          yield file;
+        }
+      }
+    },
+
+    read(run: Run) {
+      return { path: this.engine.cwd };
+    },
+
+    clean() {
+      if (this.engine.debug) {
+        return;
+      }
+    },
+
+    watch(fileChanged: FileChangedCallback) {
+      this.engine.on(EventName.Change, (file) => {
+        if (this.engine.debug) {
+          fileChanged(file);
+        }
+      });
+    },
+
+    dispose() {
+      if (this.engine.debug) {
+        return;
+      }
     },
   };
 }

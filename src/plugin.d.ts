@@ -23,9 +23,9 @@ export interface Plugin {
   filter?: Filter;
 
   /**
-   * Performs one-time initialization logic when the plugin is first loaded by a CodeEngine instance.
+   * Performs one-time initialization logic when the plugin is first mounted by CodeEngine.
    */
-  initialize?(engine: CodeEngine): void | Promise<void>;
+  initialize?(this: MountedPlugin): void | Promise<void>;
 
   /**
    * Processes a file that matches the plugin's `filter` criteria. Can be any of the following:
@@ -41,28 +41,49 @@ export interface Plugin {
    * Processes all files that match the plugin's `filter` criteria. This method is called even if no
    * files match the `filter` criteria.
    */
-  processFiles?(files: AsyncIterable<File>, run: Run): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
+  processFiles?(this: MountedPlugin, files: AsyncIterable<File>, run: Run): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
 
   /**
    * Reads source files to be built.
    */
-  read?(run: Run): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
+  read?(this: MountedPlugin, run: Run): ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
 
   /**
    * Watches source files and notifies CodeEngine whenever changes are detected.
    */
-  watch?(fileChanged: FileChangedCallback): ZeroOrMore<ChangedFileInfo> | Promise<ZeroOrMore<ChangedFileInfo>>;
+  watch?(this: MountedPlugin, fileChanged: FileChangedCallback): ZeroOrMore<ChangedFileInfo> | Promise<ZeroOrMore<ChangedFileInfo>>;
 
   /**
    * Deletes existing files from the destination, in preparation for a clean run.
    */
-  clean?(): void | Promise<void>;
+  clean?(this: MountedPlugin): void | Promise<void>;
 
   /**
    * Releases system resources, such as filesystem watchers, database connections, network connections, etc.
    * Once disposed, a plugin is no longer usable by CodeEngine.
    */
-  dispose?(): void | Promise<void>;
+  dispose?(this: MountedPlugin): void | Promise<void>;
+}
+
+
+/**
+ * A plugin that has beeen mounted by CodeEngine.
+ */
+export interface MountedPlugin extends Plugin {
+  /**
+   * The CodeEngine instance that is using this plugin.
+   * This property is set automatically by CodeEngine when the plugin is mounted.
+   */
+  readonly engine: CodeEngine;
+
+  /**
+   * Processes a file that matches the plugin's `filter` criteria.
+   *
+   * This property may have originally been a reference to a separate JavaScript module,
+   * but once mounted, that module has been loaded and the property is replaced with a reference
+   * to the module's `FileProcessor` function.
+   */
+  processFile?: FileProcessor;
 }
 
 
@@ -82,7 +103,7 @@ export type ZeroOrMore<T> = void | T | Iterable<T> | Iterator<T> | AsyncIterable
  * The results of processing `file`. This may be the modified file, a new file, multiple files,
  * or a falsy value to remove the input file from the run.
  */
-export type FileProcessor = (file: File, run: Run) => ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
+export type FileProcessor = (this: MountedPlugin, file: File, run: Run) => ZeroOrMore<FileInfo> | Promise<ZeroOrMore<FileInfo>>;
 
 
 /**
