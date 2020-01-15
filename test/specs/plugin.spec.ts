@@ -1,5 +1,5 @@
 // tslint:disable: completed-docs no-async-without-await
-import { ChangedFile, File, FileChangedCallback, FileInfo, FileProcessor, Plugin, PluginDefinition, Run, Summary, ZeroOrMore } from "../..";
+import { File, FileChangedCallback, FileInfo, FileProcessor, Plugin, PluginDefinition, Run, ZeroOrMore } from "../..";
 import { testChangedFileInfo, testFileInfo } from "./file.spec";
 import { testFilter } from "./filters.spec";
 import { testModuleDefinition } from "./module-definition.spec";
@@ -59,18 +59,6 @@ export function testSyncPlugin(): Plugin {
     dispose() {
       return;
     },
-
-    start() {
-      return;
-    },
-
-    finish(summary: Summary) {
-      return;
-    },
-
-    fileChanged(file: ChangedFile) {
-      return;
-    },
   };
 }
 
@@ -107,18 +95,6 @@ export function testAsyncPlugin(): Plugin {
 
     async dispose() {
       await Promise.resolve();
-    },
-
-    async start() {
-      await Promise.resolve();
-    },
-
-    async finish(summary: Summary) {
-      await Promise.resolve();
-    },
-
-    async fileChanged(file: ChangedFile) {
-      return;
     },
   };
 }

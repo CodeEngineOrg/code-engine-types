@@ -1,5 +1,5 @@
 // tslint:disable: member-ordering
-import { FileChangedEventListener, FinishEventListener, StartEventListener } from "./events";
+import type { CodeEngine } from "./code-engine";
 import { ChangedFileInfo, File, FileChangedCallback, FileInfo } from "./file";
 import { Filter } from "./filters";
 import { ModuleDefinition } from "./module-definition";
@@ -16,11 +16,16 @@ export interface Plugin {
 
   /**
    * Glob patterns, regular expressions, or filter functions that limit which files are processed
-   * by the plugin's `processFile()`, `processFiles()`, and `fileChanged()` methods.
+   * by the plugin's `processFile()` and `processFiles()` methods.
    *
    * Defaults to all files.
    */
   filter?: Filter;
+
+  /**
+   * Performs one-time initialization logic when the plugin is first loaded by a CodeEngine instance.
+   */
+  initialize?(engine: CodeEngine): void | Promise<void>;
 
   /**
    * Processes a file that matches the plugin's `filter` criteria. Can be any of the following:
@@ -58,21 +63,6 @@ export interface Plugin {
    * Once disposed, a plugin is no longer usable by CodeEngine.
    */
   dispose?(): void | Promise<void>;
-
-  /**
-   * Prepares for the start of a CodeEngine run.
-   */
-  start?: StartEventListener;
-
-  /**
-   * Wraps-up after a CodeEngine run finishes.
-   */
-  finish?: FinishEventListener;
-
-  /**
-   * A change has been detected in a file that matches the `filter` criteria.
-   */
-  fileChanged?: FileChangedEventListener;
 }
 
 
