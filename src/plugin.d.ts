@@ -1,5 +1,5 @@
 // tslint:disable: member-ordering
-import type { CodeEngine } from "./code-engine";
+import { CodeEngine } from "./code-engine";
 import { ChangedFileInfo, File, FileChangedCallback, FileInfo } from "./file";
 import { Filter } from "./filters";
 import { ModuleDefinition } from "./module-definition";
@@ -75,6 +75,11 @@ export interface MountedPlugin extends Plugin {
    * This property is set automatically by CodeEngine when the plugin is mounted.
    */
   readonly engine: CodeEngine;
+
+  /**
+   * The plugin name. A name is assigned by CodeEngine if not specified by the plugin.
+   */
+  name: string;
 
   /**
    * Processes a file that matches the plugin's `filter` criteria.

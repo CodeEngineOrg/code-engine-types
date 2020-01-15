@@ -213,7 +213,7 @@ export function testMountedPlugin() {
     },
 
     processFile(file: File, run: Run) {
-      file.dir = this.engine.cwd;
+      file.path = this.engine.cwd + this.name.slice(1);
       return file;
     },
 
@@ -226,7 +226,7 @@ export function testMountedPlugin() {
     },
 
     read(run: Run) {
-      return { path: this.engine.cwd };
+      return { path: this.engine.cwd + this.name.slice(1) };
     },
 
     clean() {
