@@ -35,6 +35,10 @@ export function testSyncPlugin(): Plugin {
 
     filter: testFilter(),
 
+    initialize() {
+      return;
+    },
+
     processFile(file: File, run: Run) {
       return testFileInfo();
     },
@@ -67,6 +71,10 @@ export function testAsyncPlugin(): Plugin {
     name: "My Plugin",
 
     filter: testFilter(),
+
+    async initialize() {
+      await Promise.resolve();
+    },
 
     async processFile(file: File, run: Run) {
       await Promise.resolve();
@@ -197,6 +205,12 @@ export function testMountedPlugin() {
     name: "My Plugin",
 
     filter: testFilter(),
+
+    initialize() {
+      if (this.engine.debug) {
+        return;
+      }
+    },
 
     processFile(file: File, run: Run) {
       file.dir = this.engine.cwd;
