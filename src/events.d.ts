@@ -10,7 +10,7 @@ import { Summary } from "./summary";
 export const enum EventName {
   Start = "start",
   Finish = "finish",
-  FileChanged = "fileChanged",
+  Change = "change",
   Error = "error",
   Log = "log",
 }
@@ -30,7 +30,7 @@ export type FinishEventListener = (summary: Summary) => void;
 /**
  * This event is fired when a file change is detected. It receives a `ChangedFile` object.
  */
-export type FileChangedEventListener = (file: ChangedFile) => void;
+export type ChangeEventListener = (file: ChangedFile) => void;
 
 /**
  * This event is fired whenever an unhandled error occurs.
@@ -63,61 +63,61 @@ export interface CodeEngineEventEmitter extends EventEmitter {
   // tslint:disable: completed-docs
   addListener(event: EventName.Start, listener: StartEventListener): this;
   addListener(event: EventName.Finish, listener: FinishEventListener): this;
-  addListener(event: EventName.FileChanged, listener: FileChangedEventListener): this;
+  addListener(event: EventName.Change, listener: ChangeEventListener): this;
   addListener(event: EventName.Error, listener: ErrorEventListener): this;
   addListener(event: EventName.Log, listener: LogEventListener): this;
 
   on(event: EventName.Start, listener: StartEventListener): this;
   on(event: EventName.Finish, listener: FinishEventListener): this;
-  on(event: EventName.FileChanged, listener: FileChangedEventListener): this;
+  on(event: EventName.Change, listener: ChangeEventListener): this;
   on(event: EventName.Error, listener: ErrorEventListener): this;
   on(event: EventName.Log, listener: LogEventListener): this;
 
   once(event: EventName.Start, listener: StartEventListener): this;
   once(event: EventName.Finish, listener: FinishEventListener): this;
-  once(event: EventName.FileChanged, listener: FileChangedEventListener): this;
+  once(event: EventName.Change, listener: ChangeEventListener): this;
   once(event: EventName.Error, listener: ErrorEventListener): this;
   once(event: EventName.Log, listener: LogEventListener): this;
 
   prependListener(event: EventName.Start, listener: StartEventListener): this;
   prependListener(event: EventName.Finish, listener: FinishEventListener): this;
-  prependListener(event: EventName.FileChanged, listener: FileChangedEventListener): this;
+  prependListener(event: EventName.Change, listener: ChangeEventListener): this;
   prependListener(event: EventName.Error, listener: ErrorEventListener): this;
   prependListener(event: EventName.Log, listener: LogEventListener): this;
 
   prependOnceListener(event: EventName.Start, listener: StartEventListener): this;
   prependOnceListener(event: EventName.Finish, listener: FinishEventListener): this;
-  prependOnceListener(event: EventName.FileChanged, listener: FileChangedEventListener): this;
+  prependOnceListener(event: EventName.Change, listener: ChangeEventListener): this;
   prependOnceListener(event: EventName.Error, listener: ErrorEventListener): this;
   prependOnceListener(event: EventName.Log, listener: LogEventListener): this;
 
   removeListener(event: EventName.Start, listener: StartEventListener): this;
   removeListener(event: EventName.Finish, listener: FinishEventListener): this;
-  removeListener(event: EventName.FileChanged, listener: FileChangedEventListener): this;
+  removeListener(event: EventName.Change, listener: ChangeEventListener): this;
   removeListener(event: EventName.Error, listener: ErrorEventListener): this;
   removeListener(event: EventName.Log, listener: LogEventListener): this;
 
   off(event: EventName.Start, listener: StartEventListener): this;
   off(event: EventName.Finish, listener: FinishEventListener): this;
-  off(event: EventName.FileChanged, listener: FileChangedEventListener): this;
+  off(event: EventName.Change, listener: ChangeEventListener): this;
   off(event: EventName.Error, listener: ErrorEventListener): this;
   off(event: EventName.Log, listener: LogEventListener): this;
 
   listeners(event: EventName.Start): StartEventListener[];
   listeners(event: EventName.Finish): FinishEventListener[];
-  listeners(event: EventName.FileChanged): FileChangedEventListener[];
+  listeners(event: EventName.Change): ChangeEventListener[];
   listeners(event: EventName.Error): ErrorEventListener[];
   listeners(event: EventName.Log): LogEventListener[];
 
   rawListeners(event: EventName.Start): StartEventListener[];
   rawListeners(event: EventName.Finish): FinishEventListener[];
-  rawListeners(event: EventName.FileChanged): FileChangedEventListener[];
+  rawListeners(event: EventName.Change): ChangeEventListener[];
   rawListeners(event: EventName.Error): ErrorEventListener[];
   rawListeners(event: EventName.Log): LogEventListener[];
 
   emit(event: EventName.Start, run: Run): boolean;
   emit(event: EventName.Finish, summary: Summary): boolean;
-  emit(event: EventName.FileChanged, file: ChangedFile): boolean;
+  emit(event: EventName.Change, file: ChangedFile): boolean;
   emit(event: EventName.Error, error: Error): boolean;
   emit(event: EventName.Log, data: LogEventData): boolean;
 
