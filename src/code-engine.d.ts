@@ -1,47 +1,19 @@
 import { Cloneable } from "./cloneable";
 import { CodeEngineEventEmitter } from "./events";
-import { Logger } from "./logger";
 import { PluginDefinition } from "./plugin";
+import { Context } from "./run";
 import { Summary } from "./summary";
 
 /**
  * An instance of CodeEngine. Each instance has its own set of plugins and manages its own
  * pool of worker threads.
  */
-export interface CodeEngine extends CodeEngineEventEmitter {
-  /**
-   * The directory that should be used to resolve all relative paths.
-   */
-  readonly cwd: string;
-
-  /**
-   * The number of files that CodeEngine can process concurrently.
-   */
-  readonly concurrency: number;
-
-  /**
-   * Indicates whether CodeEngine is running in local development mode.
-   * When `true`, plugins should generate files that are un-minified, un-obfuscated, and may
-   * contain references to localhost.
-   */
-  readonly dev: boolean;
-
-  /**
-   * Indicates whether CodeEngine is running in debug mode, which enables additional logging
-   * and error stack traces.
-   */
-  readonly debug: boolean;
-
+export interface CodeEngine extends Context, CodeEngineEventEmitter {
   /**
    * Indicates whether the `dispose()` method has been called.
    * Once disposed, the CodeEngine instance is no longer usable.
    */
   readonly disposed: boolean;
-
-  /**
-   * logs messages and errors
-   */
-  readonly log: Logger;
 
   /**
    * Loads one or more CodeEngine plugins.
