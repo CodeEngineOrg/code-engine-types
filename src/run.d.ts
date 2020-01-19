@@ -2,6 +2,28 @@ import { ChangedFile } from "./file";
 import { Logger } from "./logger";
 
 /**
+ * Information about a CodeEngine run.
+ */
+export interface Run extends Context {
+  /**
+   * Indicates whether this is a full run (as opposed to a partial run).
+   */
+  readonly full: boolean;
+
+  /**
+   * Indicates whether this is a partial run, which only includes files that have changed
+   * since the previous run.
+   */
+  readonly partial: boolean;
+
+  /**
+   * The file changes that have occurred since the previous run.
+   * This array will be empty for full runs.
+   */
+  readonly changedFiles: ReadonlyArray<Readonly<ChangedFile>>;
+}
+
+/**
  * Contextual information about CodeEngine.
  */
 export interface Context {
@@ -32,26 +54,4 @@ export interface Context {
    * logs messages and errors
    */
   readonly log: Logger;
-}
-
-/**
- * Information about a CodeEngine run.
- */
-export interface Run extends Context {
-  /**
-   * Indicates whether this is a full run (as opposed to a partial run).
-   */
-  readonly full: boolean;
-
-  /**
-   * Indicates whether this is a partial run, which only includes files that have changed
-   * since the previous run.
-   */
-  readonly partial: boolean;
-
-  /**
-   * The file changes that have occurred since the previous run.
-   * This array will be empty for full runs.
-   */
-  readonly changedFiles: ReadonlyArray<Readonly<ChangedFile>>;
 }
