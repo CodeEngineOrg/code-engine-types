@@ -60,9 +60,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - run: pwd
       - run: npm config get userconfig
-
-      - run: cat $(npm config get userconfig)
+      - run: cat /home/runner/.npmrc
 
       - name: Publish to NPM
         run: npm publish
