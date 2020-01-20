@@ -57,7 +57,8 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+      - name: NPM Login
+        run: echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > ~/.npmrc
 
       - run: cat ~/.npmrc
 
