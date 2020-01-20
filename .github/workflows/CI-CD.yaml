@@ -11,35 +11,35 @@ on:
     - cron: "0 0 1 * *"
 
 jobs:
-  test:
-    name: Node ${{ matrix.node }} on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 10
-    strategy:
-      fail-fast: true
-      matrix:
-        os:
-          - ubuntu-latest
-######### - macos-latest
-######### - windows-latest
-        node:
-######### - 12
-          - 13
+  # test:
+  #   name: Node ${{ matrix.node }} on ${{ matrix.os }}
+  #   runs-on: ${{ matrix.os }}
+  #   timeout-minutes: 10
+  #   strategy:
+  #     fail-fast: true
+  #     matrix:
+  #       os:
+  #         - ubuntu-latest
+  #         - macos-latest
+  #         - windows-latest
+  #       node:
+  #         - 12
+  #         - 13
 
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Checkout source
+  #       uses: actions/checkout@v2
 
-      - name: Install Node ${{ matrix.node }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
+  #     - name: Install Node ${{ matrix.node }}
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: ${{ matrix.node }}
 
-      - name: Install dependencies
-        run: npm ci
+  #     - name: Install dependencies
+  #       run: npm ci
 
-      - name: Run tests
-        run: npm test
+  #     - name: Run tests
+  #       run: npm test
 
   deploy:
     name: Publish to NPM
@@ -60,14 +60,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - run: pwd
-      - run: |
-          pushd ~
-          pwd
-          popd
-      - run: npm config get userconfig
-      - run: echo xxx$(npm config get userconfig)xxx
-      - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > /home/runner/.npmrc
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      - run: cat ~/.npmrc
 
       - name: Publish to NPM
         run: npm publish
