@@ -7,6 +7,8 @@ name: CI/CD
 
 on:
   push:
+    tags-ignore:
+      - "*"
 
   schedule:
     - cron: "0 0 1 * *"
@@ -44,7 +46,7 @@ jobs:
 
   deploy:
     name: Publish to NPM
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: github.ref == "refs/heads/master"
     runs-on: ubuntu-latest
     timeout-minutes: 10
     needs: test
@@ -62,6 +64,14 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > ~/.npmrc
 
       - name: Publish to NPM
-        run: npm publish
+        run: |
+          LOCAL_VERSION=$(node -e "console.log(require('./package').version)")
+          PUBLISHED_VERSION=$(npm view @code-engine/types version)
+
+          if [ $LOCAL_VERSION = $PUBLISHED_VERSION ]; then
+            echo Version $PUBLISHED_VERSION is already published
+          else
+            npm publish
+          fi
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
