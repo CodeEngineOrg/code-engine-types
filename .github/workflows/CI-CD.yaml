@@ -61,10 +61,15 @@ jobs:
         run: npm ci
 
       - run: pwd
+      - run: |
+          pushd ~
+          pwd
+          popd
       - run: npm config get userconfig
-      - run: cat /home/runner/.npmrc
+      - run: echo xxx$(npm config get userconfig)xxx
+      - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > /home/runner/.npmrc
 
       - name: Publish to NPM
         run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+####### env:
+#######   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
