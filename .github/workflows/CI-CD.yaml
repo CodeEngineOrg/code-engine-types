@@ -62,18 +62,6 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: NPM Login
-        run: echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > ~/.npmrc
-
-      - name: Publish to NPM
-        run: |
-          LOCAL_VERSION=$(node -e "console.log(require('./package').version)")
-          PUBLISHED_VERSION=$(npm view @code-engine/types version)
-
-          if [ $LOCAL_VERSION = $PUBLISHED_VERSION ]; then
-            echo Version $PUBLISHED_VERSION is already published
-          else
-            npm publish
-          fi
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
