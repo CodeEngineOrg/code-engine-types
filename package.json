@@ -37,13 +37,13 @@
   },
   "engineStrict": true,
   "devDependencies": {
+    "@jsdevtools/tslint-modular": "^2.0.2",
+    "@jsdevtools/version-bump-prompt": "^6.0.2",
     "@types/node": "^13.1.8",
     "npm-check": "^5.9.0",
-    "tslint": "^5.20.1",
-    "tslint-modular": "^1.4.1",
+    "tslint": "^6.0.0",
     "typescript": "^3.7.5",
-    "typescript-tslint-plugin": "^0.5.5",
-    "version-bump-prompt": "^5.0.7"
+    "typescript-tslint-plugin": "^0.5.5"
   },
   "dependencies": {}
 }
