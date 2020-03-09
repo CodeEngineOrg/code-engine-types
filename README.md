@@ -1,7 +1,7 @@
 CodeEngine type definitions
 ======================================
 
-[![Cross-Platform Compatibility](https://jstools.dev/img/badges/os-badges.svg)](https://github.com/CodeEngineOrg/code-engine-types/blob/master/.github/workflows/CI-CD.yaml)
+[![Cross-Platform Compatibility](https://engine.codes/img/badges/os-badges.svg)](https://github.com/CodeEngineOrg/code-engine-types/blob/master/.github/workflows/CI-CD.yaml)
 [![Build Status](https://github.com/CodeEngineOrg/code-engine-types/workflows/CI-CD/badge.svg)](https://github.com/CodeEngineOrg/code-engine-types/blob/master/.github/workflows/CI-CD.yaml)
 
 [![npm](https://img.shields.io/npm/v/@code-engine/types.svg)](https://www.npmjs.com/package/@code-engine/types)
