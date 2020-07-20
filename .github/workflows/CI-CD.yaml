@@ -29,7 +29,7 @@ jobs:
           - windows-latest
         node:
           - 12
-          - 13
+          - 14
 
     steps:
       - name: Checkout source
