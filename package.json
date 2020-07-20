@@ -4,7 +4,9 @@
   "description": "TypeScript type definitions for CodeEngine",
   "keywords": [
     "code-engine",
-    "type-definitions"
+    "typescript",
+    "types",
+    "definitions"
   ],
   "author": {
     "name": "James Messinger",
