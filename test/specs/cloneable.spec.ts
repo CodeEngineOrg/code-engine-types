@@ -1,11 +1,9 @@
-// tslint:disable: completed-docs
 import { Cloneable, CloneableArray, CloneableMap, CloneableObject, CloneableSet } from "../../";
 
 export function testCloneable(): Cloneable {
   return {
     notDefined: undefined,
-    empty: null,  // tslint:disable-line: no-null-keyword
-    string: "string",
+    empty: null, string: "string",
     number: 123,
     boolean: true,
     bigint: BigInt(123),

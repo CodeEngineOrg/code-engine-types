@@ -1,4 +1,3 @@
-// tslint:disable: completed-docs
 import { EventEmitter } from "events";
 import { Cloneable, CodeEngine, CodeEngineEventEmitter, PluginDefinition } from "../../";
 import { testLogger } from "./logger.spec";
@@ -15,11 +14,11 @@ export function testCodeEngine(): CodeEngine {
     public readonly disposed = false;
     public readonly log = testLogger();
 
-    public async use(...plugins: PluginDefinition[]) {
+    public async use(..._plugins: PluginDefinition[]) {
       await Promise.resolve();
     }
 
-    public async import(module: string, options?: Cloneable) {
+    public async import(_module: string, _options?: Cloneable) {
       await Promise.resolve();
     }
 
@@ -32,7 +31,7 @@ export function testCodeEngine(): CodeEngine {
       return testSummary();
     }
 
-    public watch(delay?: number) {
+    public watch(_delay?: number) {
       return;
     }
 

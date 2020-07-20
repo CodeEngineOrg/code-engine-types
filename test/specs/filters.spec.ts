@@ -1,5 +1,5 @@
-// tslint:disable: completed-docs
-import { File, Filter, FilterCriteria, FilterFunction, Filters, PathFilter, Context } from "../../";
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-unused-vars-experimental */
+import { Context, File, Filter, FilterCriteria, FilterFunction, Filters, PathFilter } from "../../";
 
 export function testPathFilter(): PathFilter {
   let filter: PathFilter = true;

@@ -1,4 +1,4 @@
-// tslint:disable: completed-docs no-async-without-await
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-unused-vars-experimental */
 import { EventName, File, FileChangedCallback, FileInfo, FileProcessor, Plugin, PluginDefinition, Run, ZeroOrMore } from "../..";
 import { testChangedFileInfo, testFileInfo } from "./file.spec";
 import { testFilter } from "./filters.spec";
@@ -6,7 +6,7 @@ import { testModuleDefinition } from "./module-definition.spec";
 
 export function testPluginDefinition(): PluginDefinition {
   let plugin: PluginDefinition = testSyncPlugin();
-  plugin = (file: File, run: Run) => undefined;
+  plugin = (_file: File, _run: Run) => undefined;
   plugin = testModuleDefinition();
   return "lodash";
 }
@@ -23,7 +23,7 @@ export function testNamedPlugin(): Plugin {
 
 export function testProcessFilePlugin(): Plugin {
   return {
-    processFile(file: File, run: Run) {
+    processFile(_file: File, _run: Run) {
       return testFileInfo();
     }
   };
@@ -39,15 +39,15 @@ export function testSyncPlugin(): Plugin {
       return;
     },
 
-    processFile(file: File, run: Run) {
+    processFile(_file: File, _run: Run) {
       return testFileInfo();
     },
 
-    processFiles(files: AsyncIterable<File>, run: Run) {
+    processFiles(_files: AsyncIterable<File>, _run: Run) {
       return testFileInfo();
     },
 
-    read(run: Run) {
+    read(_run: Run) {
       return testFileInfo();
     },
 
@@ -76,17 +76,17 @@ export function testAsyncPlugin(): Plugin {
       await Promise.resolve();
     },
 
-    async processFile(file: File, run: Run) {
+    async processFile(_file: File, _run: Run) {
       await Promise.resolve();
       return testFileInfo();
     },
 
-    async processFiles(files: AsyncIterable<File>, run: Run) {
+    async processFiles(_files: AsyncIterable<File>, _run: Run) {
       await Promise.resolve();
       return testFileInfo();
     },
 
-    async read(run: Run) {
+    async read(_run: Run) {
       await Promise.resolve();
       return testFileInfo();
     },
@@ -166,15 +166,15 @@ export function testGeneratorPlugin(): Plugin {
 
     filter: testFilter(),
 
-    * processFile(file: File, run: Run) {
+    * processFile(_file: File, _run: Run) {
       yield testFileInfo();
     },
 
-    * processFiles(files: AsyncIterable<File>, run: Run) {
+    * processFiles(_files: AsyncIterable<File>, _run: Run) {
       yield testFileInfo();
     },
 
-    * read(run: Run) {
+    * read(_run: Run) {
       yield testFileInfo();
     },
   };
@@ -186,15 +186,15 @@ export function testAsyncGeneratorPlugin(): Plugin {
 
     filter: testFilter(),
 
-    async* processFile(file: File, run: Run) {
+    async* processFile(_file: File, _run: Run) {
       yield testFileInfo();
     },
 
-    async* processFiles(files: AsyncIterable<File>, run: Run) {
+    async* processFiles(_files: AsyncIterable<File>, _run: Run) {
       yield testFileInfo();
     },
 
-    async* read(run: Run) {
+    async* read(_run: Run) {
       yield testFileInfo();
     },
   };
@@ -212,12 +212,12 @@ export function testMountedPlugin() {
       }
     },
 
-    processFile(file: File, run: Run) {
+    processFile(file: File, _run: Run) {
       file.path = this.engine.cwd + this.name.slice(1);
       return file;
     },
 
-    async* processFiles(files: AsyncIterable<File>, run: Run) {
+    async* processFiles(files: AsyncIterable<File>, _run: Run) {
       for await (let file of files) {
         if (this.engine.dev) {
           yield file;
@@ -225,7 +225,7 @@ export function testMountedPlugin() {
       }
     },
 
-    read(run: Run) {
+    read(_run: Run) {
       return { path: this.engine.cwd + this.name.slice(1) };
     },
 
@@ -264,12 +264,12 @@ export function testZeroOrMore(): ZeroOrMore<FileInfo> {
   };
   files = (function* generator() {
     yield file;
-  })();
+  }());
   files = (async function* generator() {
     yield file;
-  })();
+  }());
 }
 
 export function testFileProcessor(): FileProcessor {
-  return (file: File, run: Run) => testZeroOrMore();
+  return (_file: File, _run: Run) => testZeroOrMore();
 }

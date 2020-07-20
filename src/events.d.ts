@@ -60,7 +60,6 @@ export interface LogEventData {
  * @see https://nodejs.org/api/events.html#events_class_eventemitter
  */
 export interface CodeEngineEventEmitter extends EventEmitter {
-  // tslint:disable: completed-docs
   addListener(event: EventName.Start, listener: StartEventListener): this;
   addListener(event: EventName.Finish, listener: FinishEventListener): this;
   addListener(event: EventName.Change, listener: ChangeEventListener): this;

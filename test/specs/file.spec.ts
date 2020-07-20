@@ -1,4 +1,4 @@
-// tslint:disable: completed-docs
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-unused-vars-experimental */
 import { AnyContents, ChangedFile, ChangedFileInfo, File, FileChange, FileInfo, FileMetadata, SourceMap } from "../../";
 import { testCloneable } from "./cloneable.spec";
 

@@ -1,4 +1,4 @@
-// tslint:disable: completed-docs
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-unused-vars-experimental */
 import { EventEmitter } from "events";
 import { ChangedFile, ChangeEventListener, CodeEngineEventEmitter, ErrorEventListener, EventName, FinishEventListener, LogEventData, LogEventListener, Run, StartEventListener, Summary } from "../../";
 import { testChangedFile } from "./file.spec";
@@ -26,31 +26,31 @@ export function testLogEventData(): LogEventData {
 }
 
 export function testStartEventListener(): StartEventListener {
-  return (run: Run) => {
+  return (_run: Run) => {
     return;
   };
 }
 
 export function testFinishEventListener(): FinishEventListener {
-  return (summary: Summary) => {
+  return (_summary: Summary) => {
     return;
   };
 }
 
 export function testChangeEventListener(): ChangeEventListener {
-  return (file: ChangedFile) => {
+  return (_file: ChangedFile) => {
     return;
   };
 }
 
 export function testErrorEventListener(): ErrorEventListener {
-  return (error: Error) => {
+  return (_error: Error) => {
     return;
   };
 }
 
 export function testLogEventListener(): LogEventListener {
-  return (data: LogEventData) => {
+  return (_data: LogEventData) => {
     return;
   };
 }

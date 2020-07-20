@@ -4,10 +4,9 @@
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm
  */
 export type Cloneable =
-  // tslint:disable-next-line: no-null-undefined-union
-  undefined | null | string | number | boolean | bigint | Date | RegExp | CloneableObject | CloneableArray |
-  CloneableSet | CloneableMap | ArrayBuffer | DataView | Int8Array | Int16Array | Int32Array |
-  Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array;
+   undefined | null | string | number | boolean | bigint | Date | RegExp | CloneableObject | CloneableArray |
+   CloneableSet | CloneableMap | ArrayBuffer | DataView | Int8Array | Int16Array | Int32Array |
+   Uint8Array | Uint8ClampedArray | Uint16Array | Uint32Array | Float32Array | Float64Array;
 
 /**
  * A Cloneable Array
@@ -35,4 +34,4 @@ export interface CloneableMap extends Map<Cloneable, Cloneable> {}
  *
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm
  */
-export interface CloneableObject { [key: string]: Cloneable; }
+export interface CloneableObject { [key: string]: Cloneable }

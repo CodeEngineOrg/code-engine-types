@@ -1,4 +1,3 @@
-// tslint:disable: completed-docs
 import { Summary } from "../../src";
 import { testRun } from "./run.spec";
 

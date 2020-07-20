@@ -1,4 +1,4 @@
-// tslint:disable: completed-docs
+/* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-unused-vars-experimental */
 import { Logger, LogLevel } from "../..";
 
 export function testLogLevel(): LogLevel {
@@ -9,7 +9,6 @@ export function testLogLevel(): LogLevel {
 }
 
 export function testLogger(): Logger {
-  // tslint:disable-next-line: no-empty
   function log(message: string | Error, data?: object): void {}
   log.info = (message: string, data?: object) => undefined;
   log.debug = (message: string, data?: object) => undefined;

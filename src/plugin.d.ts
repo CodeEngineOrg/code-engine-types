@@ -1,4 +1,3 @@
-// tslint:disable: member-ordering
 import { CodeEngine } from "./code-engine";
 import { ChangedFileInfo, File, FileChangedCallback, FileInfo } from "./file";
 import { Filter } from "./filters";
