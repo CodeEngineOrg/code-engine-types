@@ -1,8 +1,8 @@
 CodeEngine type definitions
 ======================================
 
-[![Cross-Platform Compatibility](https://engine.codes/img/badges/os-badges.svg)](https://github.com/CodeEngineOrg/code-engine-types/blob/master/.github/workflows/CI-CD.yaml)
-[![Build Status](https://github.com/CodeEngineOrg/code-engine-types/workflows/CI-CD/badge.svg)](https://github.com/CodeEngineOrg/code-engine-types/blob/master/.github/workflows/CI-CD.yaml)
+[![Cross-Platform Compatibility](https://engine.codes/img/badges/os-badges.svg)](https://github.com/CodeEngineOrg/code-engine-types/actions)
+[![Build Status](https://github.com/CodeEngineOrg/code-engine-types/workflows/CI-CD/badge.svg)](https://github.com/CodeEngineOrg/code-engine-types/actions)
 
 [![npm](https://img.shields.io/npm/v/@code-engine/types.svg)](https://www.npmjs.com/package/@code-engine/types)
 [![License](https://img.shields.io/npm/l/@code-engine/types.svg)](LICENSE)
@@ -35,7 +35,7 @@ Here are the most significant types in this library:
 
 Contributing
 --------------------------
-Contributions, enhancements, and bug-fixes are welcome!  [File an issue](https://github.com/CodeEngineOrg/code-engine-types/issues) on GitHub and [submit a pull request](https://github.com/CodeEngineOrg/code-engine-types/pulls).
+Contributions, enhancements, and bug-fixes are welcome!  [Open an issue](https://github.com/CodeEngineOrg/code-engine-types/issues) on GitHub and [submit a pull request](https://github.com/CodeEngineOrg/code-engine-types/pulls).
 
 #### Building
 To build the project locally on your computer:
