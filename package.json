@@ -1,6 +1,6 @@
 {
   "name": "@code-engine/types",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "TypeScript type definitions for CodeEngine",
   "keywords": [
     "code-engine",
